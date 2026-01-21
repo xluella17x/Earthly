@@ -4,12 +4,12 @@
   "type": "module",
   "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "^1.3.6"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "scripts": {
-    "dev": "bun run login.html"
+    "dev": "bun --watch server.js"
   }
 }
