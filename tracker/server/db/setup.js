@@ -1,12 +1,12 @@
-require('dotenv').config();
-const fs = require('fs');
-const db = require('./connect');
+require("dotenv").config();
+const fs = require("fs");
+const db = require("./connect");
 
-const sql = fs.readFileSync('./tracker/server/db/habits.sql');
+const sql = fs.readFileSync("./server/db/habits.sql").toString();
 
 db.query(sql)
-    .then(data => {
-        db.end();
-        console.log('Database Setup Complete.')
-    })
-    .catch(error => console.log(error));
+  .then((data) => {
+    db.end();
+    console.log("Database Setup Complete.");
+  })
+  .catch((error) => console.log(error));
