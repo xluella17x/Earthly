@@ -6,24 +6,24 @@
 
 :root {
   --text-color: #333333;
-  --font-poppins: "gothic-poppins", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
   --font-size: 10px;
   --radius: 0.625rem;
-  --background: #89986d;
+  --background: oklch(0.75 0.09 132);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #89986d;
-  --primary-foreground: #f6f0d7;
-  --secondary: #c5d89d;
+  --primary: oklch(from #89986d l c h);
+  --primary-foreground: oklch(0.96 0.035 95);
+  --secondary: oklch(0.86 0.045 120);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
-  --destructive: #f6f0d7;
+  --destructive: oklch(0.637 0.257 29.233);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
