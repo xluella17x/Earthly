@@ -3,7 +3,7 @@ import NavItem from "./NavItem"
 
 function NavBar() {
   return (
-    <header className="w-full h-20">
+    <header className="w-full h-20 bg-secondary">
       <MaxWidthWrapper className="flex flex-row justify-between items-center w-full">
         <nav className="flex gap-2 items-center">
           <NavItem label="Do Your Bit" href="do-your-bit" />
