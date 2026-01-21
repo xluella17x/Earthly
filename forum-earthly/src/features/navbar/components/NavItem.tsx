@@ -10,7 +10,7 @@ function NavItem({ label, href }: NavItemProps) {
   return (
     <a href={href}>
       <div className={cn(buttonVariants(), "w-40 py-8")}>
-        <span className="text-lg">{label}</span>
+        <span className="text-lg font-medium">{label}</span>
       </div>
     </a>
   )
