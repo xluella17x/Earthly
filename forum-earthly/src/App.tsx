@@ -1,4 +1,3 @@
-import "./App.css"
 import NavBar from "./features/navbar/components/Navbar"
 
 function App() {
