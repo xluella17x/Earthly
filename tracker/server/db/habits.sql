@@ -1,0 +1,1 @@
+INSERT INTO habits_table (id, date, user_id, postcode, commute, recycling_bags, litter_pick_bags, meat_free_day, refill_cup, second_hand_buys) VALUES (1, DATE '2026-01-21', 1, 'B29 6EZ', '1 - Walk', 1, 1, False, False, 5)
