@@ -2,7 +2,7 @@ import NavItem from "./NavItem"
 
 function NavBar() {
   return (
-    <header className="">
+    <header className="w-full p-4 bg-(--background-color) flex justify-between items-center">
       <nav>
         <NavItem label="Do Your Bit" id="do-your-bit" />
         <NavItem label="Your Community" id="your-community" />
