@@ -4,7 +4,6 @@ function App() {
 
   return (
     <>
-    <h1>hihih i</h1>
       <NavBar />
     </>
   )
