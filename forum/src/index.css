@@ -6,7 +6,7 @@
 
 :root {
   --text-color: #333333;
-  --font-poppins: "Poppins", sans-serif;
+  --font-family: "Comic Sans MS", cursive;
   --font-size: 10px;
   --radius: 0.625rem;
   --background: oklch(0.75 0.09 132);
