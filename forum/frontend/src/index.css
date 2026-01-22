@@ -2,6 +2,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* --- TAILWIND CONFIGURATION --- */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -13,6 +14,8 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  
+  /* Semantic Color Mapping */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -31,11 +34,15 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  
+  /* Charting Colors */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  
+  /* Sidebar Specifics */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -46,97 +53,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-:root {
-  /* --- BASE SETTINGS --- */
-  --font-family: "Poppins", sans-serif;
-  --radius: 0.625rem;
-
-  /* --- 60%: THE DOMINANT BACKGROUND (Sage Green) --- */
-  /* Your Sage Green Hex: #89986D */
-  --background: oklch(from #89986D l c h);
-  /* Text on the background should be light (Cream) */
-  --foreground: oklch(from #F6F0D7 l c h);
-
-  /* --- 30%: THE CARDS (Cream) --- */
-  /* Your Cream Hex: #F6F0D7 */
-  --card: oklch(from #F6F0D7 l c h);
-  /* Text inside cards needs to be dark for contrast */
-  --card-foreground: oklch(from #2C3324 l c h); 
-
-  /* --- 10%: THE ACCENT (Sunny Yellow) --- */
-  /* New "Solar" Yellow for Buttons/CTAs */
-  --primary: oklch(from #FFB703 l c h);
-  /* Text inside the yellow button (Dark Green looks best on Yellow) */
-  --primary-foreground: oklch(from #2C3324 l c h);
-
-  /* --- SUPPORTING COLORS --- */
-  /* Your Light Green Hex: #C5D89D */
-  /* Use this for secondary badges or less important buttons */
-  --secondary: oklch(from #C5D89D l c h);
-  --secondary-foreground: oklch(from #2C3324 l c h);
-
-  /* Muted is a faded version of your background */
-  --muted: oklch(from #89986D l c h / 0.5);
-  --muted-foreground: oklch(from #F6F0D7 l c h / 0.8);
-
-  /* Destructive (Red) - kept standard but tweaked to match vibe */
-  --destructive: oklch(0.637 0.257 29.233);
-  
-  /* Borders - slightly darker sage */
-  --border: oklch(from #76855B l c h);
-  --input: oklch(from #F6F0D7 l c h / 0.5);
-  --ring: oklch(from #FFB703 l c h); /* Focus ring is yellow */
-
-  /* Charts - mapped to your palette */
-  --chart-1: oklch(from #FFB703 l c h); /* Yellow */
-  --chart-2: oklch(from #C5D89D l c h); /* Light Green */
-  --chart-3: oklch(from #F6F0D7 l c h); /* Cream */
-  --chart-4: oklch(from #89986D l c h); /* Sage */
-  --chart-5: oklch(0.769 0.188 70.08);
-
-  /* Sidebar - matching the main background */
-  --sidebar: oklch(from #89986D l c h);
-  --sidebar-foreground: oklch(from #F6F0D7 l c h);
-  --sidebar-primary: oklch(from #FFB703 l c h);
-  --sidebar-primary-foreground: oklch(from #2C3324 l c h);
-  --sidebar-accent: oklch(from #C5D89D l c h);
-  --sidebar-accent-foreground: oklch(from #2C3324 l c h);
-  --sidebar-border: oklch(from #F6F0D7 l c h / 0.2);
-  --sidebar-ring: oklch(from #FFB703 l c h);
-}
-
-.dark {
-  /* --- DARK MODE (Deep Forest Theme) --- */
-  /* We invert the logic: Dark Green background, Sage cards */
-  
-  /* A very deep green, almost black */
-  --background: oklch(0.18 0.05 135); 
-  --foreground: oklch(from #F6F0D7 l c h);
-
-  /* Your Sage Green becomes the card color in dark mode */
-  --card: oklch(from #2C3324 l c h); 
-  --card-foreground: oklch(from #F6F0D7 l c h);
-
-  /* Primary Yellow pops AMAZINGLY against dark green */
-  --primary: oklch(from #FFB703 l c h);
-  --primary-foreground: oklch(from #2C3324 l c h);
-
-  --secondary: oklch(from #89986D l c h);
-  --secondary-foreground: oklch(from #F6F0D7 l c h);
-
-  --muted: oklch(0.25 0.05 135);
-  --muted-foreground: oklch(0.70 0.05 135);
-  
-  --accent: oklch(0.25 0.05 135);
-  --accent-foreground: oklch(0.985 0 0);
-  
-  --destructive: oklch(0.704 0.191 22.216);
-  
-  --border: oklch(from #89986D l c h / 0.2);
-  --input: oklch(from #89986D l c h / 0.2);
-  --ring: oklch(from #FFB703 l c h);
-}
-
+/* --- GLOBAL RESETS --- */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -145,4 +62,112 @@
     @apply bg-background text-foreground;
     font-family: var(--font-poppins);
   }
+}
+
+/* --- THEME DEFINITIONS --- */
+:root {
+  /* Typography & Layout */
+  --font-family: "Poppins", sans-serif;
+  --radius: 0.625rem;
+
+  /* COLOR PALETTE: EARTHY THEME (60-30-10 RULE)
+    Ref: #89986D (Sage), #F6F0D7 (Cream), #FFB703 (Solar Yellow)
+  */
+
+  /* 60% - Dominant Surface */
+  /* Sage Green background with high-contrast Cream text */
+  --background: oklch(from #89986D l c h);
+  --foreground: oklch(from #F6F0D7 l c h);
+
+  /* 30% - Secondary Surface (Cards/Containers) */
+  /* Cream cards with Dark Green text for readability */
+  --card: oklch(from #F6F0D7 l c h);
+  --card-foreground: oklch(from #2C3324 l c h);
+  --popover: oklch(from #F6F0D7 l c h);
+  --popover-foreground: oklch(from #2C3324 l c h);
+
+  /* 10% - Primary Action (CTAs) */
+  /* Solar Yellow - High visibility for key actions */
+  --primary: oklch(from #FFB703 l c h);
+  --primary-foreground: oklch(from #2C3324 l c h);
+
+  /* Secondary Actions */
+  /* Light Green - Used for badges and supportive UI elements */
+  --secondary: oklch(from #C5D89D l c h);
+  --secondary-foreground: oklch(from #2C3324 l c h);
+
+  /* Interaction States (Hover/Focus) */
+  /* Mapped to Primary (Yellow) to ensure 'ghost' variants highlight correctly */
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+
+  /* Muted / Disabled States */
+  --muted: oklch(from #89986D l c h / 0.5);
+  --muted-foreground: oklch(from #F6F0D7 l c h / 0.8);
+
+  /* Status Colors */
+  --destructive: oklch(0.637 0.257 29.233); /* Standard Red */
+
+  /* Borders & Inputs */
+  --border: oklch(from #76855B l c h); /* Darker Sage for definition */
+  --input: oklch(from #F6F0D7 l c h / 0.5);
+  --ring: var(--primary); /* Focus rings match the primary action color */
+
+  /* Data Visualization */
+  --chart-1: oklch(from #FFB703 l c h); /* Yellow */
+  --chart-2: oklch(from #C5D89D l c h); /* Light Green */
+  --chart-3: oklch(from #F6F0D7 l c h); /* Cream */
+  --chart-4: oklch(from #89986D l c h); /* Sage */
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  /* Sidebar Component Overrides */
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--secondary-foreground);
+  --sidebar-border: oklch(from #F6F0D7 l c h / 0.2);
+  --sidebar-ring: var(--ring);
+}
+
+.dark {
+  /* DARK MODE PALETTE: DEEP FOREST
+    Inverts the light theme logic for low-light environments.
+    Background becomes deep green; Cards become dark sage.
+  */
+  
+  /* Dominant Surface */
+  --background: oklch(0.18 0.05 135); /* Deep Forest Green */
+  --foreground: oklch(from #F6F0D7 l c h);
+
+  /* Secondary Surface */
+  --card: oklch(from #2C3324 l c h); 
+  --card-foreground: oklch(from #F6F0D7 l c h);
+  --popover: oklch(from #2C3324 l c h);
+  --popover-foreground: oklch(from #F6F0D7 l c h);
+
+  /* Primary Action */
+  --primary: oklch(from #FFB703 l c h); /* Yellow remains for contrast */
+  --primary-foreground: oklch(from #2C3324 l c h);
+
+  /* Secondary Action */
+  --secondary: oklch(from #89986D l c h);
+  --secondary-foreground: oklch(from #F6F0D7 l c h);
+
+  /* Interaction States */
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+
+  /* Muted / Disabled States */
+  --muted: oklch(0.25 0.05 135);
+  --muted-foreground: oklch(0.70 0.05 135);
+  
+  /* Status Colors */
+  --destructive: oklch(0.704 0.191 22.216);
+  
+  /* Borders & Inputs */
+  --border: oklch(from #89986D l c h / 0.2);
+  --input: oklch(from #89986D l c h / 0.2);
+  --ring: var(--primary);
 }
