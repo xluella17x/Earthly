@@ -1,20 +1,21 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"
 import NavItem from "./NavItem"
 
+const navItems = [
+  { label: "Do Your Bit", href: "/do-your-bit" },
+  { label: "Your Community", href: "/your-community" },
+  { label: "Local Data", href: "/local-data" },
+  { label: "Learn", href: "/learn" },
+]
+
 function NavBar() {
   return (
-    <header className="w-full h-20 bg-secondary">
-      <MaxWidthWrapper className="flex flex-row justify-between items-center w-full">
-        <nav className="flex gap-2 items-center">
-          <NavItem label="Do Your Bit" href="do-your-bit" />
-          <NavItem label="Your Community" href="your-community" />
-          <NavItem label="Local Data" href="local-data" />
-          <NavItem label="Learn" href="learn" />
-        </nav>
-        <a href="/">
-          <img src="logo.png" alt="Logo" className="size-20 object-contain" />
-        </a>
-      </MaxWidthWrapper>
+    <header className="w-full h-20 bg-secondary rounded items-center flex px-3">
+      <nav className="flex gap-3">
+        {navItems.map((item) => (
+          <NavItem key={item.href} label={item.label} href={item.href} />
+        ))}
+      </nav>
     </header>
   )
 }
