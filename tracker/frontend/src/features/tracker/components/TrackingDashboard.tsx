@@ -7,7 +7,7 @@ type TrackingDashboardProps = {
 const TrackingDashboard = ({ className }: TrackingDashboardProps) => {
   return (
     <SecondaryCardWrapper className={className}>
-      <h1 className="font-semibold">Track your Habits, See your Impact</h1>
+      <h1 className="font-semibold text-3xl">Track your Habits, See your Impact</h1>
       <div className="flex">
         <div></div>
       </div>
