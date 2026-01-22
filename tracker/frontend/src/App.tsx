@@ -8,7 +8,10 @@ import SmallScreenMsg from "./components/SmallScreenMsg"
 function App() {
   return (
     <>
-      <SmallScreenMsg className="md:hidden" />
+      <div className="md:hidden h-dvh flex items-center">
+        <SmallScreenMsg className="" />
+      </div>
+
       <div className="hidden md:flex flex-col gap-6">
         <Navbar />
         <WelcomeMsg />
