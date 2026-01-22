@@ -6,7 +6,8 @@ const Greeting = () => {
   return (
     <div>
       <h1 className="text-6xl">
-        Hi, <span>{user.name}</span>
+        <span>Hi, </span>
+        <span>{user.name}</span>
       </h1>
     </div>
   )
