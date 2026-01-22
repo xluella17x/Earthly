@@ -7,7 +7,7 @@ type SidebarProps = {
 
 const Sidebar = ({ className }: SidebarProps) => {
   return (
-    <div className={`flex flex-col ${className}`}>
+    <div className={`flex flex-col gap-3 ${className}`}>
       <PostcodeImpactStats />
       <PostcodeImpactSentence />
     </div>
