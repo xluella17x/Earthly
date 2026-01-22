@@ -67,7 +67,7 @@
 /* --- THEME DEFINITIONS --- */
 :root {
   /* Typography & Layout */
-  --font-family: "Poppins", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
   --radius: 0.625rem;
 
   /* COLOR PALETTE: EARTHY THEME (60-30-10 RULE)
