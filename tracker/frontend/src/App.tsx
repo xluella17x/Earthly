@@ -6,7 +6,7 @@ import Sidebar from "./features/sidebar/components/Sidebar"
 
 function App() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="hidden md:flex flex-col gap-6">
       <Navbar />
       <WelcomeMsg />
       <div className="flex gap-3">
