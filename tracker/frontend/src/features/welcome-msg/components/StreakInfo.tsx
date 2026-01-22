@@ -6,7 +6,7 @@ const StreakInfo = () => {
   return (
     <div className="bg-secondary text-secondary-foreground flex items-center gap-1.5 rounded p-1.5">
       <div className="w-50">
-        <h2 className="text-3xl">Your Green Streak</h2>
+        <h2 className="text-3xl text-center">Your Green Streak</h2>
       </div>
 
       <div className="bg-card rounded flex items-center gap-1.5 p-1.5 pr-3">

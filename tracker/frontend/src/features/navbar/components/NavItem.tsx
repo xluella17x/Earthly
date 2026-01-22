@@ -12,7 +12,7 @@ function NavItem({ label, href }: NavItemProps) {
   return (
     <a href={href}>
       <div className={cn(buttonVariants({ variant: "card" }), "w-40 py-8 whitespace-break-spaces")}>
-        <span className="text-lg font-medium">{label}</span>
+        <span className="text-lg font-medium text-center">{label}</span>
       </div>
     </a>
   )
