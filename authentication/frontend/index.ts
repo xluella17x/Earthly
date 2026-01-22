@@ -7,7 +7,7 @@ export default {
     const url = new URL(request.url)
 
     if (url.pathname === "/") {
-      return Response.redirect("/authentication/login.html")
+      return Response.redirect("./login.html")
     }
 
     const file = Bun.file("." + url.pathname)
