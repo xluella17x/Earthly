@@ -11,7 +11,7 @@ const stats = {
 const PostcodeImpactStats = () => {
   return (
     <SecondaryCardWrapper className="text-left flex flex-col gap-3">
-      <h3 className="font-bold text-2xl text-center mb-3">Postcode Impact Stats</h3>
+      <h3 className="font-semibold text-2xl text-center mb-3">Postcode Impact Stats</h3>
       <ul className="space-y-1.5 pl-6">
         <li>
           <p>
