@@ -6,7 +6,7 @@ type SmallScreenMsgProps = {
 
 const SmallScreenMsg = ({ className }: SmallScreenMsgProps) => {
     return ( 
-        <SecondaryCardWrapper>
+        <SecondaryCardWrapper className={className}>
             <p className="text-center">
                 This application is not optimised for small screens. Please access it on a device with a larger screen for the best experience.
             </p>
