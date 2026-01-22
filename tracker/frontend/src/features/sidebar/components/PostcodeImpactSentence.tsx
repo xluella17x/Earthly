@@ -15,14 +15,19 @@ const stats = {
 // e.g. Y = power Buckingham palace
 // e.g. Z = three days
 const sentences = {
-  electricity: <p>Your community has saved enough <span className="font-bold">electricity</span> this week to power Buckingham Palace for three days.</p>,
+  // if the only info we are given is electricitySavedInkWh e.g. 20 kWh, how should we generate the sentence?
+  electricity: (
+    <p>
+      Your community has saved enough{" "}
+      <span className="font-bold">electricity</span> this week to{" "}
+      <span className="font-bold">power Buckingham Palace</span> for{" "}
+      <span className="font-bold">three days</span>.
+    </p>
+  ),
 }
+
 const PostcodeImpactSentence = () => {
-  return (
-    <SecondaryCardWrapper>
-        {sentences.electricity}
-    </SecondaryCardWrapper>
-  )
+  return <SecondaryCardWrapper>{sentences.electricity}</SecondaryCardWrapper>
 }
 
 export default PostcodeImpactSentence
