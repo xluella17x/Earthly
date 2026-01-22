@@ -1,6 +1,17 @@
+import SecondaryWrapper from "@/components/SecondaryWrapper";
+
+const user = {
+    location: "Victoria"
+};
+
 const Location = () => {
     return ( 
-        <div>Location Component</div>
+        <SecondaryWrapper className="bg-secondary text-secondary-foreground">
+            <p>
+                <span>Your Community: </span>
+                <span>{user.location}</span>
+            </p>
+        </SecondaryWrapper>
      );
 }
  
