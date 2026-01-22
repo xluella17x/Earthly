@@ -1,6 +1,10 @@
+import SecondaryCardWrapper from "@/components/SecondaryCardWrapper";
+
 const Filter = () => {
     return ( 
-        <div>Filter Component</div>
+        <SecondaryCardWrapper>
+            <div>Filter</div>
+        </SecondaryCardWrapper>
      );
 }
  
