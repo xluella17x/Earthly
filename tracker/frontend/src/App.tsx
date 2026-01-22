@@ -8,7 +8,7 @@ import SmallScreenMsg from "./components/SmallScreenMsg"
 function App() {
   return (
     <>
-      <div className="md:hidden h-dvh flex items-center">
+      <div className="md:hidden flex items-center justify-center absolute inset-0 mx-12">
         <SmallScreenMsg className="" />
       </div>
 
