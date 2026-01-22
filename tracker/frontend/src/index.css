@@ -1,68 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-poppins);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* --- BASE SETTINGS --- */
+  --font-family: "Poppins", sans-serif;
+  --radius: 0.625rem;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* --- 60%: THE DOMINANT BACKGROUND (Sage Green) --- */
+  /* Sage Green Hex: #89986D */
+  --background: oklch(from #89986D l c h);
+  /* Text on the background should be light (Cream) */
+  --foreground: oklch(from #F6F0D7 l c h);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* --- 30%: THE CARDS (Cream) --- */
+  /* Cream Hex: #F6F0D7 */
+  --card: oklch(from #F6F0D7 l c h);
+  /* Text inside cards needs to be dark for contrast */
+  --card-foreground: oklch(from #2C3324 l c h); 
+
+  /* --- 10%: THE ACCENT (Sunny Yellow) --- */
+  /* Solar Yellow for Buttons/CTAs */
+  --primary: oklch(from #FFB703 l c h);
+  /* Text inside the yellow button (Dark Green looks best on Yellow) */
+  --primary-foreground: oklch(from #2C3324 l c h);
+
+  /* --- SUPPORTING COLORS --- */
+  /* Light Green Hex: #C5D89D */
+  /* Use this for secondary badges or less important buttons */
+  --secondary: oklch(from #C5D89D l c h);
+  --secondary-foreground: oklch(from #2C3324 l c h);
+
+  /* Muted is a faded version of background */
+  --muted: oklch(from #89986D l c h / 0.5);
+  --muted-foreground: oklch(from #F6F0D7 l c h / 0.8);
+
+  /* Destructive (Red) - kept standard but tweaked to match vibe */
+  --destructive: oklch(0.637 0.257 29.233);
+  
+  /* Borders - slightly darker sage */
+  --border: oklch(from #76855B l c h);
+  --input: oklch(from #F6F0D7 l c h / 0.5);
+  --ring: oklch(from #FFB703 l c h); /* Focus ring is yellow */
+
+  /* Charts - mapped to palette */
+  --chart-1: oklch(from #FFB703 l c h); /* Yellow */
+  --chart-2: oklch(from #C5D89D l c h); /* Light Green */
+  --chart-3: oklch(from #F6F0D7 l c h); /* Cream */
+  --chart-4: oklch(from #89986D l c h); /* Sage */
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  /* Sidebar - matching the main background */
+  --sidebar: oklch(from #89986D l c h);
+  --sidebar-foreground: oklch(from #F6F0D7 l c h);
+  --sidebar-primary: oklch(from #FFB703 l c h);
+  --sidebar-primary-foreground: oklch(from #2C3324 l c h);
+  --sidebar-accent: oklch(from #C5D89D l c h);
+  --sidebar-accent-foreground: oklch(from #2C3324 l c h);
+  --sidebar-border: oklch(from #F6F0D7 l c h / 0.2);
+  --sidebar-ring: oklch(from #FFB703 l c h);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+.dark {
+  /* --- DARK MODE (Deep Forest Theme) --- */
+  /* We invert the logic: Dark Green background, Sage cards */
+  
+  /* A very deep green, almost black */
+  --background: oklch(0.18 0.05 135); 
+  --foreground: oklch(from #F6F0D7 l c h);
+
+  /* Sage Green becomes the card color in dark mode */
+  --card: oklch(from #2C3324 l c h); 
+  --card-foreground: oklch(from #F6F0D7 l c h);
+
+  /* Primary Yellow pops AMAZINGLY against dark green */
+  --primary: oklch(from #FFB703 l c h);
+  --primary-foreground: oklch(from #2C3324 l c h);
+
+  --secondary: oklch(from #89986D l c h);
+  --secondary-foreground: oklch(from #F6F0D7 l c h);
+
+  --muted: oklch(0.25 0.05 135);
+  --muted-foreground: oklch(0.70 0.05 135);
+  
+  --accent: oklch(0.25 0.05 135);
+  --accent-foreground: oklch(0.985 0 0);
+  
+  --destructive: oklch(0.704 0.191 22.216);
+  
+  --border: oklch(from #89986D l c h / 0.2);
+  --input: oklch(from #89986D l c h / 0.2);
+  --ring: oklch(from #FFB703 l c h);
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-poppins);
   }
 }
