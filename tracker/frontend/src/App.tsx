@@ -1,11 +1,10 @@
-import './App.css'
-import Navbar from './features/navbar/components/Navbar'
+import "./App.css"
+import Navbar from "./features/navbar/components/Navbar"
 
 function App() {
-
   return (
     <>
-      <Navbar />
+        <Navbar />
     </>
   )
 }
