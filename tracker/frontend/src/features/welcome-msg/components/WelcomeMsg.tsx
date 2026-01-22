@@ -3,7 +3,7 @@ import StreakInfo from "./StreakInfo";
 
 const WelcomeMsg = () => {
     return ( 
-        <div>
+        <div className="flex gap-6 items-center">
             <Greeting />
             <StreakInfo />
         </div>
