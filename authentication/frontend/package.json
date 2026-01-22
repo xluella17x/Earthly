@@ -10,6 +10,6 @@
     "typescript": "^5"
   },
   "scripts": {
-    "dev": "bun --watch server.js"
+    "dev": "bun --watch index.ts"
   }
 }

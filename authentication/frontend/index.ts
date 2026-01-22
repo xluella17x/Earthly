@@ -1,12 +1,15 @@
+/// <reference lib="dom" />
+/// <reference lib="dom.iterable" />
+
 export default {
   port: 3005,
-  fetch(request) {
+  fetch(request: Request) {
     const url = new URL(request.url)
-    
+
     if (url.pathname === "/") {
-      return Response.redirect("./login.html")
+      return Response.redirect("/authentication/login.html")
     }
-    
+
     const file = Bun.file("." + url.pathname)
     return new Response(file)
   },
