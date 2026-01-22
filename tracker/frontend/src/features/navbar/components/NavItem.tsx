@@ -6,6 +6,8 @@ type NavItemProps = {
   href: string
 }
 
+// TODO: Add active state styling
+
 function NavItem({ label, href }: NavItemProps) {
   return (
     <a href={href}>
