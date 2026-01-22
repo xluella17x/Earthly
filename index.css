@@ -107,7 +107,7 @@
 
 .dark {
   /* --- DARK MODE (Deep Forest Theme) --- */
-  /* We invert the logic: Dark Green background, Sage cards */
+  /* Dark Green background, Sage cards */
   
   /* A very deep green, almost black */
   --background: oklch(0.18 0.05 135); 
@@ -117,7 +117,7 @@
   --card: oklch(from #2C3324 l c h); 
   --card-foreground: oklch(from #F6F0D7 l c h);
 
-  /* Primary Yellow pops AMAZINGLY against dark green */
+  /* Primary Yellow pops well against dark green */
   --primary: oklch(from #FFB703 l c h);
   --primary-foreground: oklch(from #2C3324 l c h);
 
