@@ -1,4 +1,3 @@
-import MaxWidthWrapper from "@/components/MaxWidthWrapper"
 import NavItem from "./NavItem"
 
 const navItems = [
