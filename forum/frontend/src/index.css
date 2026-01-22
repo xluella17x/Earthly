@@ -1,46 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @custom-variant dark (&:is(.dark *));
-
-:root {
-  --text-color: #333333;
-  --font-family: "Comic Sans MS", cursive;
-  --font-size: 10px;
-  --radius: 0.625rem;
-  --background: oklch(0.75 0.09 132);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(from #89986d l c h);
-  --primary-foreground: oklch(0.96 0.035 95);
-  --secondary: oklch(0.86 0.045 120);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.637 0.257 29.233);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
 
 @theme inline {
   --font-sans: var(--font-poppins);
@@ -84,38 +46,95 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+:root {
+  /* --- BASE SETTINGS --- */
+  --font-family: "Poppins", sans-serif;
+  --radius: 0.625rem;
+
+  /* --- 60%: THE DOMINANT BACKGROUND (Sage Green) --- */
+  /* Your Sage Green Hex: #89986D */
+  --background: oklch(from #89986D l c h);
+  /* Text on the background should be light (Cream) */
+  --foreground: oklch(from #F6F0D7 l c h);
+
+  /* --- 30%: THE CARDS (Cream) --- */
+  /* Your Cream Hex: #F6F0D7 */
+  --card: oklch(from #F6F0D7 l c h);
+  /* Text inside cards needs to be dark for contrast */
+  --card-foreground: oklch(from #2C3324 l c h); 
+
+  /* --- 10%: THE ACCENT (Sunny Yellow) --- */
+  /* New "Solar" Yellow for Buttons/CTAs */
+  --primary: oklch(from #FFB703 l c h);
+  /* Text inside the yellow button (Dark Green looks best on Yellow) */
+  --primary-foreground: oklch(from #2C3324 l c h);
+
+  /* --- SUPPORTING COLORS --- */
+  /* Your Light Green Hex: #C5D89D */
+  /* Use this for secondary badges or less important buttons */
+  --secondary: oklch(from #C5D89D l c h);
+  --secondary-foreground: oklch(from #2C3324 l c h);
+
+  /* Muted is a faded version of your background */
+  --muted: oklch(from #89986D l c h / 0.5);
+  --muted-foreground: oklch(from #F6F0D7 l c h / 0.8);
+
+  /* Destructive (Red) - kept standard but tweaked to match vibe */
+  --destructive: oklch(0.637 0.257 29.233);
+  
+  /* Borders - slightly darker sage */
+  --border: oklch(from #76855B l c h);
+  --input: oklch(from #F6F0D7 l c h / 0.5);
+  --ring: oklch(from #FFB703 l c h); /* Focus ring is yellow */
+
+  /* Charts - mapped to your palette */
+  --chart-1: oklch(from #FFB703 l c h); /* Yellow */
+  --chart-2: oklch(from #C5D89D l c h); /* Light Green */
+  --chart-3: oklch(from #F6F0D7 l c h); /* Cream */
+  --chart-4: oklch(from #89986D l c h); /* Sage */
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  /* Sidebar - matching the main background */
+  --sidebar: oklch(from #89986D l c h);
+  --sidebar-foreground: oklch(from #F6F0D7 l c h);
+  --sidebar-primary: oklch(from #FFB703 l c h);
+  --sidebar-primary-foreground: oklch(from #2C3324 l c h);
+  --sidebar-accent: oklch(from #C5D89D l c h);
+  --sidebar-accent-foreground: oklch(from #2C3324 l c h);
+  --sidebar-border: oklch(from #F6F0D7 l c h / 0.2);
+  --sidebar-ring: oklch(from #FFB703 l c h);
+}
+
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
+  /* --- DARK MODE (Deep Forest Theme) --- */
+  /* We invert the logic: Dark Green background, Sage cards */
+  
+  /* A very deep green, almost black */
+  --background: oklch(0.18 0.05 135); 
+  --foreground: oklch(from #F6F0D7 l c h);
+
+  /* Your Sage Green becomes the card color in dark mode */
+  --card: oklch(from #2C3324 l c h); 
+  --card-foreground: oklch(from #F6F0D7 l c h);
+
+  /* Primary Yellow pops AMAZINGLY against dark green */
+  --primary: oklch(from #FFB703 l c h);
+  --primary-foreground: oklch(from #2C3324 l c h);
+
+  --secondary: oklch(from #89986D l c h);
+  --secondary-foreground: oklch(from #F6F0D7 l c h);
+
+  --muted: oklch(0.25 0.05 135);
+  --muted-foreground: oklch(0.70 0.05 135);
+  
+  --accent: oklch(0.25 0.05 135);
   --accent-foreground: oklch(0.985 0 0);
+  
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  
+  --border: oklch(from #89986D l c h / 0.2);
+  --input: oklch(from #89986D l c h / 0.2);
+  --ring: oklch(from #FFB703 l c h);
 }
 
 @layer base {
