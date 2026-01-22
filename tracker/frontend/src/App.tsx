@@ -4,10 +4,10 @@ import WelcomeMsg from "./features/welcome-msg/components/WelcomeMsg"
 
 function App() {
   return (
-    <>
-        <Navbar />
-        <WelcomeMsg />
-    </>
+    <div className="flex flex-col gap-3">
+      <Navbar />
+      <WelcomeMsg />
+    </div>
   )
 }
 
