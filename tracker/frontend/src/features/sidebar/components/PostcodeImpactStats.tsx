@@ -10,36 +10,36 @@ const stats = {
 
 const PostcodeImpactStats = () => {
   return (
-    <SecondaryCardWrapper>
-      <h3 className="font-bold text-2xl">Postcode Impact Stats</h3>
-      <li>
-        <ul>
+    <SecondaryCardWrapper className="text-left flex flex-col gap-3">
+      <h3 className="font-bold text-2xl text-center mb-3">Postcode Impact Stats</h3>
+      <ul className="space-y-1.5 pl-6">
+        <li>
           <p>
             CO2 saved: <span>{stats.co2SavedInKg} kg</span>
           </p>
-        </ul>
-        <ul>
+        </li>
+        <li>
           <p>
             Water saved: <span>{stats.waterSavedInL} L</span>
           </p>
-        </ul>
-        <ul>
+        </li>
+        <li>
           <p>
             Electricity saved: <span>{stats.electricitySavedInkWh} kWh</span>
           </p>
-        </ul>
-        <ul>
+        </li>
+        <li>
           <p>
             Landfill saved: <span>{stats.landfillSavedInKg} kg</span>
           </p>
-        </ul>
-        <ul>
+        </li>
+        <li>
           <p>
-            Money saved:
+            Money saved:{" "}
             <span>£{(stats.moneySavedInPennies / 100).toFixed(2)}</span>
           </p>
-        </ul>
-      </li>
+        </li>
+      </ul>
     </SecondaryCardWrapper>
   )
 }
