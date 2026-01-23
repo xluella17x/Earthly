@@ -1,5 +1,5 @@
 import { PostTable } from "../../../db/drizzle/schema"
-import { eq } from "drizzle-orm"
+import { and, eq, isNull } from "drizzle-orm"
 
 type User = { 
   id: string
@@ -20,4 +20,7 @@ export function canDeletePost(user: User | undefined, postUserId: string) {
   return user.role === "admin" || user.id === postUserId
 }
 
-export const wherePublicPosts = eq(PostTable.type, "event")
+export const wherePublicPosts = and(
+  eq(PostTable.status, "published"),
+  isNull(PostTable.deletedAt)
+)
