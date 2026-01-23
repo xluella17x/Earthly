@@ -1,10 +1,8 @@
 import { Elysia } from "elysia"
+import { postsRouter } from "./routes/posts"
+
 const app = new Elysia()
-  .get("/", "Hello Elysia")
-  .get("/user/:id", ({ params: { id } }) => id)
-  .post("/form", ({ body }) => body)
+  .use(postsRouter)
   .listen(3000)
 
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`,
-)
+console.log(`🦊 Forum Service running at ${app.server?.hostname}:${app.server?.port}`)
