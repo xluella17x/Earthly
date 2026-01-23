@@ -26,4 +26,4 @@ export const postSchema = t.Object(
   { additionalProperties: false },
 )
 
-export type CreatePostInput = typeof postSchema.static
+// export type CreatePostInput = typeof postSchema.static
