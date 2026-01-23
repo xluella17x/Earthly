@@ -53,6 +53,64 @@ class Habit {
 
     return new Habit(response.rows[0]);
   }
+
+  static async stats() {
+      // Collect commute statistics
+      let walkers = await db.query(
+        "SELECT COUNT(commute) FROM habits_table WHERE commute = '1 - Walk;"
+      )
+      let cyclists = await db.query(
+        "SELECT COUNT(commute) FROM habits_table WHERE commute = '2 - Cycle;"
+      )
+      let drivers = await db.query(
+        "SELECT COUNT(commute) FROM habits_table WHERE commute = '3 - Car;"
+      )
+      let busUsers = await db.query(
+        "SELECT COUNT(commute) FROM habits_table WHERE commute = '4 - Bus;"
+      )
+      let trainUsers = await db.query(
+        "SELECT COUNT(commute) FROM habits_table WHERE commute = '5 - Train;"
+      )
+
+      // Collect recycling statistics
+      let recycling_count = await db.query(
+        "SELECT SUM(recycling_bags) FROM habits_table;"
+      )
+
+      // Collect litter pick stats
+      let litterSum = await db.query(
+        "SELECT SUM(litter_pick_bags) FROM habits_table;"
+      )
+
+      // Collect meat-free day stats
+      let meatFreeDays = await db.query(
+        "SELECT COUNT(meat_free_day) FROM habits_table WHERE meat_free_day = 'TRUE';"
+      )
+
+      // Collect refill cups data
+      let refillCups = await db.query(
+        "SELECT COUNT(refill_cup) FROM habits_table WHERE refill_cup = 'TRUE';"
+      )
+
+      // Collect second hand buy data
+      let secondHandBuys = await db.query(
+        "SELECT SUM(second_hand_buys) FROM habits_table;"
+      )
+
+      // Return an object full of the latest statistics from the database
+      return {
+        'walkers': walkers,
+        'cyclists': cyclists,
+        'drivers': drivers,
+        'busUsers': busUsers,
+        'trainUsers': trainUsers,
+        'recyclingCount': recyclingCount,
+        'litterSum': litterSum,
+        'meatFreeDays': meatFreeDays,
+        'refillCups': refillCups,
+        'secondHandBuys': secondHandBuys
+      }   
+  }
 }
 
 module.exports = Habit;
