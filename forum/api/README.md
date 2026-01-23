@@ -44,3 +44,11 @@ Places where queries would have been copy and pasted multiple times for the post
 - Elysia was built around type-safety (compared to Next.js for example which had to have type-safety added to it)
 - Supports Typebox which is faster than Zod, and also supports Zod which is popular
 - Great documentation
+
+## Reasoning for Feature-based folder structure
+Even though we are currently planning on doing posts, we may consider doing comments as well in the future, or another feature that is part of the forum.
+
+If you want to delete a feature, you can just delete the entire folder, no need to hunt through a layer-based folder structure.
+
+If you are using external tools like an Auth provider, and want to switch, you only need to go to the services folder and change one file.
+
