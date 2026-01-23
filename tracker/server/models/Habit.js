@@ -24,18 +24,15 @@ class Habit {
   }
 
   static async create(data) {
-    const {
-      date,
-      user_id,
-      postcode,
-      commute,
-      recycling_bags,
-      litter_pick_bags,
-      meat_free_day,
-      refill_cup,
-      second_hand_buys,
-    } = data;
-
+    const { date,
+        user_id,
+        postcode,
+        commute,
+        recycling_bags,
+        litter_pick_bags,
+        meat_free_day,
+        refill_cup,
+        second_hand_buys } = data
     let response = await db.query(
       "INSERT INTO habits_table (date, user_id, postcode, commute, recycling_bags, litter_pick_bags, meat_free_day, refill_cup, second_hand_buys) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;",
       [
@@ -47,7 +44,7 @@ class Habit {
         litter_pick_bags,
         meat_free_day,
         refill_cup,
-        second_hand_buys,
+        second_hand_buys
       ],
     );
 
@@ -55,4 +52,4 @@ class Habit {
   }
 }
 
-module.exports = Habit;
+module.exports = { Habit };

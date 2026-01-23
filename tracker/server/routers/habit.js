@@ -4,4 +4,6 @@ const habitsController = require('../controllers/habit')
 
 const habitsRouter = Router()
 
-habitsRouter.post('/tracker', habitsController.create)
+habitsRouter.post('/habits', habitsController.create)
+
+module.exports = { habitsRouter }
