@@ -56,11 +56,11 @@ class Habit {
 
   static async stats() {
       // Collect commute statistics
-      let walkers = await db.query("SELECT COUNT(commute) FROM habits_table WHERE commute = '1 - Walk;")
-      let cyclists = await db.query( "SELECT COUNT(commute) FROM habits_table WHERE commute = '2 - Cycle;")
-      let drivers = await db.query("SELECT COUNT(commute) FROM habits_table WHERE commute = '3 - Car;")
-      let busUsers = await db.query("SELECT COUNT(commute) FROM habits_table WHERE commute = '4 - Bus;")
-      let trainUsers = await db.query("SELECT COUNT(commute) FROM habits_table WHERE commute = '5 - Train;")
+      let walkers = await db.query("SELECT COUNT(commute) FROM habits_table WHERE commute = '1 - Walk';")
+      let cyclists = await db.query( "SELECT COUNT(commute) FROM habits_table WHERE commute = '2 - Cycle';")
+      let drivers = await db.query("SELECT COUNT(commute) FROM habits_table WHERE commute = '3 - Car';")
+      let busUsers = await db.query("SELECT COUNT(commute) FROM habits_table WHERE commute = '4 - Bus';")
+      let trainUsers = await db.query("SELECT COUNT(commute) FROM habits_table WHERE commute = '5 - Train';")
 
       // Collect recycling statistics
       let recyclingCount = await db.query("SELECT SUM(recycling_bags) FROM habits_table;")
