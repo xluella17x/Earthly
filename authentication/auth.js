@@ -41,8 +41,48 @@ if (loginForm) {
         community: user.community
       })
     );
-
-    window.location.href = "dashboard.html";
+    window.location.href = "welcome.html";
   });
 }
 
+if (signupForm) {
+  signupForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      first_name: signupForm.querySelector('[name="first_name"]').value,
+      last_name: signupForm.querySelector('[name="last_name"]').value,
+      email_address: signupForm.querySelector('[name="email_address"]').value,
+      password: signupForm.querySelector('[name="password"]').value,
+      postcode: signupForm.querySelector('[name="postcode"]').value,
+      community: signupForm.querySelector('[name="community"]').value
+    };
+
+    const { data: existingUser, error: selectError } =
+      await supabaseClient
+        .from("user_table")
+        .select("id")
+        .eq("email_address", formData.email_address)
+        .maybeSingle();
+
+    if (existingUser) {
+      alert("A user with this email already exists");
+      return;
+    }
+
+    const { data, error } = await supabaseClient
+      .from("user_table")
+      .insert([formData])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Insert error:", error);
+      alert("Signup failed");
+      return;
+    }
+
+    alert("Account created successfully! Please log in.");
+    window.location.href = "login.html";
+  });
+}
