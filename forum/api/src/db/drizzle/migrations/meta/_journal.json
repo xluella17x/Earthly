@@ -8,6 +8,13 @@
       "when": 1769129194434,
       "tag": "0000_soft_dazzler",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1769129611340,
+      "tag": "0001_fancy_wolfsbane",
+      "breakpoints": true
     }
   ]
 }
