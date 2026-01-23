@@ -32,3 +32,12 @@ Places where queries would have been copy and pasted multiple times for the post
 - getting posts by a user, and posts for the feed.
 - getting a single post. "Attending" is only for posts that are events, so first need to check its type by fetching the post. So this would use the fetch post function. 
 
+
+## Reasoning for Elysia + Bun
+
+- It is 21x times faster than Express, literal no-brainer.
+- Elysia is mature enough to compete with 
+- Bun was recently acquired by Anthropic (if that matters).
+- Elysia was built around type-safety (compared to Next.js for example which had to have type-safety added to it)
+- Supports Typebox which is faster than Zod, and also supports Zod which is popular
+- Great documentation
