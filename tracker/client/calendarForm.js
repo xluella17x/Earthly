@@ -71,7 +71,7 @@ function closePopup() {
     popupForm.classList.remove("show");
 }
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const formData = new FormData(form);
@@ -81,6 +81,36 @@ form.addEventListener('submit', (e) => {
 
     const jsonFormData = JSON.stringify(dataObject);
     localStorage.setItem('form', jsonFormData);
+
+    const form = new FormData(e.target);
+    try {
+        const options = {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            date: dataObject.date,
+            user_id: 1, 
+            postcode: 'B29 6EZ', 
+            commute: dataObject.commute, 
+            recycling_bags: dataObject.no_of_boxes, 
+            litter_pick_bags: dataObject.no_of_bags, 
+            meat_free_day: dataObject.meat_free, 
+            refill_cup: dataObject.refill_cup, 
+            second_hand_buys: dataObject.no_of_purchases
+            }),
+        };
+        const response = await fetch("http://localhost:3000/tracker", options);
+        const responseData = await response.json();
+
+        if (responseData.success) {
+            popupForm.reset();
+        }
+        } catch (err) {
+            console.log(err);
+        }
 
     console.log(dataObject);
 
