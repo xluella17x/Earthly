@@ -1,7 +1,12 @@
-import { pgTable, primaryKey, text, uuid } from "drizzle-orm/pg-core"
+import { pgEnum, pgTable, primaryKey, text, uuid } from "drizzle-orm/pg-core"
 import { relations } from "drizzle-orm"
 import { createdAt, updatedAt } from "../schemaHelpers"
 import { PostTable } from "./post"
+
+export const postAttendeeStatuses = ["going", "interested", "not_going"] as const
+export type PostAttendeeStatus = (typeof postAttendeeStatuses)[number]
+export const postAttendeeStatusEnum = pgEnum("post_attendee_status", postAttendeeStatuses)
+
 
 export const PostAttendeeTable = pgTable(
   "post_attendees_table",
@@ -10,7 +15,7 @@ export const PostAttendeeTable = pgTable(
       .notNull()
       .references(() => PostTable.id, { onDelete: "cascade" }),
     userId: text("user_id").notNull(),
-    status: text("status").notNull().default("going"), 
+    status: postAttendeeStatusEnum("status").notNull().default("not_going"), 
     createdAt,
     updatedAt,
   },
