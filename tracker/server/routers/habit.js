@@ -6,4 +6,4 @@ const habitsRouter = Router()
 habitsRouter.post('/', habitsController.create)
 habitsRouter.get('/', habitsController.getStats)
 
-module.exports = habitsRouter;
+module.exports = { habitsRouter };
