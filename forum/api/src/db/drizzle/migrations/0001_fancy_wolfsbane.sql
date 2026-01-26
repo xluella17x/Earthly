@@ -1,0 +1,2 @@
+CREATE TYPE "public"."post_type" AS ENUM('event', 'discussion', 'announcement');--> statement-breakpoint
+ALTER TABLE "posts_table" ALTER COLUMN "type" SET DATA TYPE "public"."post_type" USING "type"::"public"."post_type";
