@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(cors())
 app.use(logger)
 
-app.use('/habits', habitsRouter)
+app.use('/tracker', habitsRouter)
 
 app.get('/', (req, res) => {
     res.status(200).json()

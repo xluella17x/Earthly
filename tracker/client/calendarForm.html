@@ -1,43 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="calendarFormStyle.css">
+    <link
+      rel="stylesheet"
+      href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="calendarFormStyle.css" />
     <script defer src="calendarForm.js"></script>
     <title>Calendar Form - Data Passing</title>
-</head>
+  </head>
 
-<body>
-  <div class="container">
-    <div class="calendar">
+  <body>
+    <div class="container">
+      <div class="calendar" id="calendar-container">
         <div class="header">
-            <button id="prevBtn">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <div class="monthYear" id="monthYear"></div>
-            <button id="nextBtn">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
+          <button id="prevBtn">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="monthYear" id="monthYear"></div>
+          <button id="nextBtn">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
         <div class="days">
-            <div class="day">Mon</div>
-            <div class="day">Tue</div>
-            <div class="day">Wed</div>
-            <div class="day">Thu</div>
-            <div class="day">Fri</div>
-            <div class="day">Sat</div>
-            <div class="day">Sun</div>
+          <div class="day">Mon</div>
+          <div class="day">Tue</div>
+          <div class="day">Wed</div>
+          <div class="day">Thu</div>
+          <div class="day">Fri</div>
+          <div class="day">Sat</div>
+          <div class="day">Sun</div>
         </div>
         <div class="dates" id="dates"></div>
-    </div>
-    
-    <form action="">
+      </div>
+
+      <form action="">
         <i class="close fa fa-times" onclick="closePopup()"></i>
 
         <div class="logo">
@@ -117,7 +120,7 @@
                 id="no_of_boxes"
                 name="no_of_boxes"
                 placeholder="If you selected no, you can leave this blank"
-                value=0
+                value="0"
               />
             </div>
           </fieldset>
@@ -149,7 +152,7 @@
                 id="no_of_bags"
                 name="no_of_bags"
                 placeholder="If you selected no, you can leave this blank"
-                value=0
+                value="0"
               />
             </div>
           </fieldset>
@@ -227,14 +230,27 @@
                 id="no_of_purchases"
                 name="no_of_purchases"
                 placeholder="If you selected no, you can leave this blank"
-                value=0
+                value="0"
               />
             </div>
           </fieldset>
         </div>
 
-        <button class="submit" name="submit">Submit Habits</button>
+        <button class="submit" name="submit" id="habits-submit-button">Submit Habits</button>
       </form>
+
+      <div class="submit-popup" id="submit-popup">
+        <img src="EarthlyLogo.png">
+        <h2>Well Done!</h2>
+        <p>Your habits have been successfully submitted.</p>
+        <br>
+        <p>
+          Go check out how your contributions have boosted your community's
+          impact!
+        </p>
+        <button type="button" id="close-success">Done</button>
+      </div>
+
     </div>
-</body>
+  </body>
 </html>

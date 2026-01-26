@@ -47,16 +47,14 @@ describe('tracker page element structure', () => {
 
     // Test calendar container
     it('displays a calendar', () => {
-        const calendarContainer = document.querySelector('#calendarContainer');
+        const calendarContainer = document.querySelector('#calendar-container');
 
         // Existence
         expect(calendarContainer).toBeTruthy();
 
-        // Contains habits
-        expect(calendarContainer.innerHTML).toContain('Commute')
-
         // Contains calendar
-        expect(calendarContainer.innerHTML).toContain('Calendar')
+        expect(calendarContainer.innerHTML).toContain('monthYear')
+        expect(calendarContainer.innerHTML).toContain('dates')
     });
 
     // Test brand container
@@ -103,3 +101,49 @@ describe('tracker page element structure', () => {
     })
 });
 
+// Test onClick functionality for calendar and form submission
+describe('tracker page element structure', () => {
+    // Render a new DOM each time
+    beforeEach(async () => {
+        dom = await renderDOM('./tracker.jsx');
+        document = await dom.window.document;
+    });
+
+    it('presents habit tracking form when a date is clicked', () => {
+        const dates = document.getElementById('clickable-date');
+        const popupForm = document.querySelector("form");
+
+        // Check that when you click a date the form shows
+        dates.click();
+        expect(popupForm.classList).toContain('show');
+    })
+
+    it('closes the popup form when you click submit', () => {
+        const submitButton = document.getElementById('habits-submit-button')
+        const popupForm = document.querySelector("form");
+
+        popupForm.classList.add('show');
+        // Check that when you click submit the form disappears
+        submitButton.click();
+        expect(popupForm.classList).not.toContain('show');
+    })
+
+    it('displays a success message when you submit the form', () => {
+        const submitButton = document.getElementById('habits-submit-button')
+        const successPopup = document.getElementById('submit-popup');
+
+        // Check that when you submit the form, the success popup displays
+        submitButton.click();
+        expect(successPopup.classList).toContain('show-submit-popup')
+    })
+
+    it('closes the success popup when you click done', () => {
+        const closeButton = document.getElementById('close-success')
+        const successPopup = document.getElementById('submit-popup');
+
+        successPopup.classList.add('show-submit-popup');
+        // Check that when you submit the form, the success popup displays
+        closeButton.click();
+        expect(successPopup.classList).not.toContain('show-submit-popup')
+    })
+});
