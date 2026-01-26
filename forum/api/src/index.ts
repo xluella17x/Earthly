@@ -1,8 +1,14 @@
 import { Elysia } from "elysia"
-import { postsRouter } from "./routes/posts"
+import { postsRoutes } from "./routes/posts"
+import { swagger } from "@elysiajs/swagger"
+import { cors } from "@elysiajs/cors"
 
 const app = new Elysia()
-  .use(postsRouter)
-  .listen(3000)
+  .use(swagger())
+  .use(cors())
+  .use(postsRoutes)
+  .get("/", () => "Welcome to the Forum Service!")
+  .listen(5174)
+  
 
 console.log(`🦊 Forum Service running at ${app.server?.hostname}:${app.server?.port}`)
