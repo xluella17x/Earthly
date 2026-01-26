@@ -1,6 +1,6 @@
-const { Habit } = require('../models/Habit')
+const Habit = require('../models/Habit');
 
-const create = async (req, res) => {
+async function create(req, res) {
     try {
         const data = req.body
         const result = await Habit.create(data)
@@ -14,4 +14,15 @@ const create = async (req, res) => {
     }
 }
 
-module.exports = { create }
+async function getStats(req, res) {
+    try {
+        const stats = Habit.stats();
+        res.status(200).json(stats);
+    } catch(err) {
+        res.status(404).json({error: 'Stats could not be fetched.'});
+    };
+};
+
+module.exports = {
+  create,
+  getStats};

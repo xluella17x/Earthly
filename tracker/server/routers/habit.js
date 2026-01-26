@@ -1,9 +1,9 @@
 const { Router } = require('express')
-
 const habitsController = require('../controllers/habit')
 
 const habitsRouter = Router()
 
-habitsRouter.post('/habits', habitsController.create)
+habitsRouter.post('/', habitsController.create)
+habitsRouter.get('/', habitsController.getStats)
 
-module.exports = { habitsRouter }
+module.exports = { habitsRouter };

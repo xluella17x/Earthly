@@ -5,6 +5,8 @@ const nextBtn = document.getElementById('nextBtn');
 
 const popupForm = document.querySelector("form");
 const form = document.querySelector("form");
+const successPopup = document.getElementById('submit-popup');
+const closeSuccessBtn = document.getElementById('close-success');
 
 let currentDate = new Date();
 
@@ -31,7 +33,7 @@ const updateCalendar = () => {
     for (let i = 1; i <= totalDays; i++) {
         const date = new Date(currentYear, currentMonth, i);
         const activeClass = date.toDateString() === new Date().toDateString() ? 'active' : '';
-        datesHTML += `<div class="date ${activeClass}" data-date="${currentYear}-${currentMonth + 1}-${i}">${i}</div>`;
+        datesHTML += `<div class="date ${activeClass}" id="clickable-date" data-date="${currentYear}-${currentMonth + 1}-${i}">${i}</div>`;
     }
 
     for (let i = 1; i <= 7 - lastDayIndex; i++) {
@@ -47,7 +49,6 @@ let selectedDate = null;
 datesElement.addEventListener("click", (e) => {
     const dateClicked = e.target.closest(".date");
     selectedDate = dateClicked.dataset.date;
-    console.log(selectedDate);
     openPopup();
 })
 
@@ -72,6 +73,15 @@ function closePopup() {
 }
 
 form.addEventListener('submit', async (e) => {
+function openSuccessPopup() {
+    successPopup.classList.add('show-submit-popup');
+}
+
+function closeSuccessPopup() {
+    successPopup.classList.remove('show-submit-popup');
+}
+
+form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const formData = new FormData(form);
@@ -115,4 +125,11 @@ form.addEventListener('submit', async (e) => {
     console.log(dataObject);
 
     closePopup();
+})
+
+    openSuccessPopup();
+})
+
+closeSuccessBtn.addEventListener('click', (e) => {
+    closeSuccessPopup();
 })
