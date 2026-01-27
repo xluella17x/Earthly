@@ -25,8 +25,7 @@ export const PostTable = pgTable("posts_table", {
   lng: doublePrecision("longitude"),
   createdAt,
   updatedAt,
-  deletedAt: timestamp({ withTimezone: true }),
-})
+deletedAt: timestamp("deleted_at", { withTimezone: true }),})
 
 export const PostRelationships = relations(PostTable, ({ many }) => ({
   likes: many(PostLikeTable),
