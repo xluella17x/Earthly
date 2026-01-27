@@ -2,7 +2,7 @@ import NavItem from "./NavItem"
 
 const navItems = [
   { label: "Do Your Bit", href: "/do-your-bit" },
-  { label: "Your Community", href: "/your-community" },
+  { label: "Your Community", href: "/your-community", isActive: true },
   { label: "Local Data", href: "/local-data" },
   { label: "Learn", href: "/learn" },
 ]
@@ -13,7 +13,12 @@ function NavBar() {
       <nav className="flex justify-between w-full items-center">
         <div className="flex gap-3">
           {navItems.map((item) => (
-            <NavItem key={item.href} label={item.label} href={item.href} />
+            <NavItem
+              key={item.href}
+              label={item.label}
+              href={item.href}
+              isActive={item.isActive}
+            />
           ))}
         </div>
         <a href="/">
