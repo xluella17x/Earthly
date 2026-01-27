@@ -6,7 +6,10 @@
     "dev": "bun run --watch src/index.ts",
     "db:generate": "drizzle-kit generate",
     "db:studio": "drizzle-kit studio",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:reset": "bun run src/db/drizzle/reset.ts",
+    "db:seed": "bun run src/db/drizzle/seed.ts"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.4.1",
