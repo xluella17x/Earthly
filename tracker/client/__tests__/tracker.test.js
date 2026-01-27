@@ -9,7 +9,7 @@ let document;
 describe('tracker page element structure', () => {
     // Render a new DOM each time
     beforeEach(async () => {
-        dom = await renderDOM('./tracker.jsx');
+        dom = await renderDOM('./tracker.html');
         document = await dom.window.document;
     });
 
