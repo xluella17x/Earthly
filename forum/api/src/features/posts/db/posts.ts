@@ -1,13 +1,19 @@
 import { db } from "../../../db/drizzle/db"
-import { 
-  PostTable, 
-  PostLikeTable, 
-  PostAttendeeTable, 
-  PostAttendeeStatus 
+import {
+  PostTable,
+  PostLikeTable,
+  PostAttendeeTable,
+  PostAttendeeStatus,
 } from "../../../db/drizzle/schema"
 import { and, eq } from "drizzle-orm"
 
-export async function userOwnsPost({ userId, postId }: { userId: string, postId: string }) {
+export async function userOwnsPost({
+  userId,
+  postId,
+}: {
+  userId: string
+  postId: string
+}) {
   const existingPost = await db.query.PostTable.findFirst({
     where: and(eq(PostTable.id, postId), eq(PostTable.userId, userId)),
   })
@@ -15,9 +21,9 @@ export async function userOwnsPost({ userId, postId }: { userId: string, postId:
 }
 
 export async function insertPost(data: typeof PostTable.$inferInsert) {
-  return await db.transaction(async trx => {
+  return await db.transaction(async (trx) => {
     const [newPost] = await trx.insert(PostTable).values(data).returning()
-    
+
     if (!newPost) {
       trx.rollback()
       throw new Error("Failed to create post")
@@ -28,12 +34,12 @@ export async function insertPost(data: typeof PostTable.$inferInsert) {
 
 export async function updatePost(
   id: string,
-  data: Partial<typeof PostTable.$inferInsert>
+  data: Partial<typeof PostTable.$inferInsert>,
 ) {
-  return await db.transaction(async trx => {
+  return await db.transaction(async (trx) => {
     const [updatedPost] = await trx
       .update(PostTable)
-      .set({ ...data, updatedAt: new Date() }) 
+      .set({ ...data, updatedAt: new Date() })
       .where(eq(PostTable.id, id))
       .returning()
 
@@ -54,7 +60,6 @@ export async function deletePost(id: string) {
   if (!deletedPost) throw new Error("Failed to delete post")
   return deletedPost
 }
-
 
 export async function togglePostLike(postId: string, userId: string) {
   return await db.transaction(async (trx) => {
