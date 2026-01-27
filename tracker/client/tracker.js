@@ -175,7 +175,7 @@ form.addEventListener('submit', async (e) => {
             second_hand_buys: dataObject.no_of_purchases
             }),
         };
-        
+
         const response = await fetch("http://localhost:3000/tracker", options);
         const responseData = await response.json();
 
@@ -192,6 +192,33 @@ form.addEventListener('submit', async (e) => {
 
 })
 
+// Incomplete or erroneous form handling
+
+form.addEventListener('submit', function(e) {
+    const recyclingYes = document.getElementById('recycling_yes').checked;
+    const litterYes = document.getElementById('litter_yes').checked;
+    const secondHandYes = document.getElementById('second_hand_buy_yes').checked;
+  
+    const noOfBoxes = Number(document.getElementById('no_of_boxes').value);
+    const noOfBags = Number(document.getElementById('no_of_bags').value);
+    const noOfPurchases = Number(document.getElementById('no_of_purchases').value);
+  
+    if (recyclingYes && (isNaN(noOfBoxes) || noOfBoxes <= 0)) {
+      e.preventDefault();
+      alert('Please enter a number greater than 0 for recycling boxes.');
+    }
+  
+    if (litterYes && (isNaN(noOfBags) || noOfBags <= 0)) {
+      e.preventDefault();
+      alert('Please enter a number greater than 0 for litter bags.');
+    }
+  
+    if (secondHandYes && (isNaN(noOfPurchases) || noOfPurchases <= 0)) {
+      e.preventDefault();
+      alert('Please enter a number greater than 0 for second-hand purchases.');
+    }
+});
+  
 closeSuccessBtn.addEventListener('click', (e) => {
     closeSuccessPopup();
     updateStats();
