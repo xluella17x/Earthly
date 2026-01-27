@@ -1,7 +1,11 @@
 export const API_URL = import.meta.env.VITE_API_URL
 
 export async function fetcher(url: string, options?: RequestInit) {
-  const res = await fetch(`${API_URL}${url}`, options)
+// ensure no double slashes if env variable ends with slash
+  const baseUrl = API_URL.replace(/\/$/, "")
+  const endpoint = url.startsWith("/") ? url : `/${url}`
+
+  const res = await fetch(`${baseUrl}${endpoint}`, options)
   
   if (!res.ok) {
     const error = await res.text()
