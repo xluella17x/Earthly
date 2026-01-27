@@ -88,7 +88,7 @@ class Habit {
 
       // Return an object full of the statistics to be displayed on tracker page
       return {
-        'co2 Saved': co2Saved,
+        'co2Saved': co2Saved,
         'Water Saved': waterSaved,
         'Electricity Saved': electricitySaved,
         'Landfill Saved': landfillSaved,

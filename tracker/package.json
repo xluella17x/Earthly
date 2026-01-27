@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon -L ./server/index.js",
     "setup-db": "node server/db/setup.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --detectOpenHandles --runInBand --verbose",
+    "unitTests": "jest --testPathPattern=/unit/ --watchAll --verbose",
+    "coverage": "jest --coverage --testPathPattern=/unit/"
   },
   "devDependencies": {
     "jest": "^30.2.0",
