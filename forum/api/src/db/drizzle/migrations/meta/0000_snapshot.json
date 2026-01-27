@@ -1,5 +1,5 @@
 {
-  "id": "69f8f7ef-8618-4222-b25f-b6d3b38d4ec8",
+  "id": "0e49e726-d378-47b1-9cac-9473ff2b05da",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -35,7 +35,8 @@
         },
         "type": {
           "name": "type",
-          "type": "text",
+          "type": "post_type",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
@@ -44,6 +45,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "post_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
         },
         "location_name": {
           "name": "location_name",
@@ -63,19 +71,25 @@
           "primaryKey": false,
           "notNull": false
         },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp with time zone",
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp with time zone",
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -102,9 +116,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp with time zone",
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
@@ -158,21 +172,22 @@
         },
         "status": {
           "name": "status",
-          "type": "text",
+          "type": "post_attendee_status",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'going'"
+          "default": "'not_going'"
         },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp with time zone",
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp with time zone",
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
@@ -209,7 +224,35 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {},
+  "enums": {
+    "public.post_status": {
+      "name": "post_status",
+      "schema": "public",
+      "values": [
+        "draft",
+        "published",
+        "archived"
+      ]
+    },
+    "public.post_type": {
+      "name": "post_type",
+      "schema": "public",
+      "values": [
+        "event",
+        "discussion",
+        "announcement"
+      ]
+    },
+    "public.post_attendee_status": {
+      "name": "post_attendee_status",
+      "schema": "public",
+      "values": [
+        "going",
+        "interested",
+        "not_going"
+      ]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "roles": {},
