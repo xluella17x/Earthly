@@ -1,14 +1,11 @@
-const Habit = require('../models/Habit');
+const { Habit } = require('../models/Habit');
 
 async function create(req, res) {
     try {
         const data = req.body
         const result = await Habit.create(data)
         console.log(req.body);
-        res.status(200).json({
-            "success": true,
-            "result": result
-        })
+        res.status(200).json({ data: result })
     } catch (err) {
         res.status(500).json({ error: err.message || 'Unknown error' })
     }
