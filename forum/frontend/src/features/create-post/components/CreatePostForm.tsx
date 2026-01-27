@@ -1,6 +1,5 @@
 import SecondaryMutedCardWrapper from "@/components/SecondaryMutedCardWrapper"
 import { useState } from "react"
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { fetcher } from "@/lib/api"
