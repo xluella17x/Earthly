@@ -71,20 +71,20 @@ class Habit {
       let secondHandBuys = Number((await db.query("SELECT SUM(second_hand_buys) FROM habits_table;")).rows[0].sum);
 
       // Calculate co2 saved
-      const co2Saved = 2.28*(walkers+cyclists) + 0.96*busUsers + 1.66*trainUsers + 0.51*recyclingCount + 0.27*meatFreeDays + 0.02*refillCups + 1.8*secondHandBuys;
+      const co2Saved = Math.round(2.28*(walkers+cyclists) + 0.96*busUsers + 1.66*trainUsers + 0.51*recyclingCount + 0.27*meatFreeDays + 0.02*refillCups + 1.8*secondHandBuys);
 
       // Calculate water saved
-      const waterSaved = 20.9*recyclingCount + 1561*meatFreeDays + refillCups + 5000*secondHandBuys;
+      const waterSaved = Math.round(20.9*recyclingCount + 1561*meatFreeDays + refillCups + 5000*secondHandBuys);
 
       // Calculate electricity saved
-      const electricitySaved = 84.1*recyclingCount + 3.3*meatFreeDays + 4.2*secondHandBuys;
+      const electricitySaved = Math.round(84.1*recyclingCount + 3.3*meatFreeDays + 4.2*secondHandBuys);
 
       // Calculate landfill saved
-      const landfillSaved = 12.5*recyclingCount + 0.02*refillCups + 0.3*secondHandBuys;
+      const landfillSaved = Math.round(12.5*recyclingCount + 0.02*refillCups + 0.3*secondHandBuys);
 
       // Return an object full of the statistics to be displayed on tracker page
       return {
-        'co2Saved': co2Saved,
+        'co2 Saved': co2Saved,
         'Water Saved': waterSaved,
         'Electricity Saved': electricitySaved,
         'Landfill Saved': landfillSaved,

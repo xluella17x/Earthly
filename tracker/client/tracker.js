@@ -8,6 +8,11 @@ const form = document.querySelector("form");
 const successPopup = document.getElementById('submit-popup');
 const closeSuccessBtn = document.getElementById('close-success');
 
+const co2saved = document.getElementById('co2-saved');
+const waterSaved = document.getElementById('water-saved');
+const electricitySaved = document.getElementById('electricity-saved');
+const landfillSaved = document.getElementById('landfill-saved');
+
 let currentDate = new Date();
 
 const updateCalendar = () => {
@@ -43,6 +48,33 @@ const updateCalendar = () => {
 
     datesElement.innerHTML = datesHTML;
 }
+
+const updateStats = async () => {
+    try {
+        const options = {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        }
+        };
+
+        const response = await fetch("http://localhost:3000/tracker", options);
+        const responseData = await response.json();
+
+        console.log(responseData);
+
+        co2saved.textContent = 'CO2 Saved: ' + responseData['co2 Saved'].toString() + ' kg';
+        waterSaved.textContent = 'Water Saved: ' + responseData['Water Saved'].toString() + ' L';
+        electricitySaved.textContent = 'Electricity Saved: ' + responseData['Electricity Saved'].toString() + ' kWh';
+        landfillSaved.textContent = 'Landfill Saved: ' + responseData['Landfill Saved'].toString() + ' kg';
+
+    } catch (err) {
+            console.log(err);
+    }
+}
+
+updateStats();
 
 let selectedDate = null;
 
@@ -80,7 +112,7 @@ function closeSuccessPopup() {
     successPopup.classList.remove('show-submit-popup');
 }
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const formData = new FormData(form);
@@ -91,42 +123,42 @@ form.addEventListener('submit', (e) => {
     const jsonFormData = JSON.stringify(dataObject);
     localStorage.setItem('form', jsonFormData);
 
-    // try {
-    //     const options = {
-    //     method: "POST",
-    //     headers: {
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //         date: dataObject.date,
-    //         user_id: 1, 
-    //         postcode: 'B29 6EZ', 
-    //         commute: dataObject.commute, 
-    //         recycling_bags: dataObject.no_of_boxes, 
-    //         litter_pick_bags: dataObject.no_of_bags, 
-    //         meat_free_day: dataObject.meat_free, 
-    //         refill_cup: dataObject.refill_cup, 
-    //         second_hand_buys: dataObject.no_of_purchases
-    //         }),
-    //     };
-    //     const response = await fetch("http://localhost:3000/tracker", options);
-    //     const responseData = await response.json();
+    try {
+        const options = {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            date: dataObject.date,
+            user_id: 1, 
+            postcode: 'B29 6EZ', 
+            commute: dataObject.commute, 
+            recycling_bags: dataObject.no_of_boxes, 
+            litter_pick_bags: dataObject.no_of_bags, 
+            meat_free_day: dataObject.meat_free, 
+            refill_cup: dataObject.refill_cup, 
+            second_hand_buys: dataObject.no_of_purchases
+            }),
+        };
+        const response = await fetch("http://localhost:3000/tracker", options);
+        const responseData = await response.json();
 
-    //     if (responseData.success) {
-    //         popupForm.reset();
-    //     }
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
+        if (responseData.success) {
+            popupForm.reset();
+            openSuccessPopup();
+        }
 
-    console.log(dataObject);
+    } catch (err) {
+            console.log(err);
+    }
 
     closePopup();
 
-    openSuccessPopup();
 })
 
 closeSuccessBtn.addEventListener('click', (e) => {
     closeSuccessPopup();
+    updateStats();
 })
