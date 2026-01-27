@@ -68,8 +68,6 @@ const updateStats = async () => {
         const response = await fetch("http://localhost:3000/tracker", options);
         const responseData = await response.json();
 
-        console.log(responseData);
-
         co2saved.textContent = 'CO2 Saved: ' + responseData['co2 Saved'].toString() + ' kg';
         waterSaved.textContent = 'Water Saved: ' + responseData['Water Saved'].toString() + ' L';
         electricitySaved.textContent = 'Electricity Saved: ' + responseData['Electricity Saved'].toString() + ' kWh';
@@ -177,6 +175,7 @@ form.addEventListener('submit', async (e) => {
             second_hand_buys: dataObject.no_of_purchases
             }),
         };
+        
         const response = await fetch("http://localhost:3000/tracker", options);
         const responseData = await response.json();
 
