@@ -18,7 +18,7 @@ async function getStats(req, res) {
     try {
         const stats = await Habit.stats();
         console.log(stats);
-        res.status(200).json(stats);
+        res.status(200).json({ data: stats });
     } catch(err) {
         res.status(404).json({error: 'Stats could not be fetched.'});
     };
