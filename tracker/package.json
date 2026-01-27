@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "run": "node index.js",
     "dev": "nodemon -L ./server/index.js",
     "setup-db": "node server/db/setup.js",
     "test": "jest --watchAll --detectOpenHandles --runInBand --verbose",

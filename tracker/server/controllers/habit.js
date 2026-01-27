@@ -13,7 +13,8 @@ async function create(req, res) {
 
 async function getStats(req, res) {
     try {
-        const stats = Habit.stats();
+        const stats = await Habit.stats();
+        console.log(stats);
         res.status(200).json(stats);
     } catch(err) {
         res.status(404).json({error: 'Stats could not be fetched.'});
