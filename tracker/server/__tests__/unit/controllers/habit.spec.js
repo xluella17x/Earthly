@@ -1,5 +1,5 @@
 const habitsController = require('../../../controllers/habit')
-const { Habit } = require('../../../models/Habit')
+const  { Habit }  = require('../../../models/Habit')
 
 // Mocking response methods
 const mockSend = jest.fn()
@@ -28,6 +28,10 @@ describe('habits controller', () => {
             jest.spyOn(Habit, 'create').mockResolvedValue(new Habit(testHabit))
 
             await habitsController.create(mockReq, mockRes)
+
+            expect(Habit.create).toHaveBeenCalledTimes(1)
+            expect(mockStatus).toHaveBeenCalledWith(200)
+            expect(mockJson).toHaveBeenCalledWith({ data: new Habit({ ...testHabit}) })
         })
     })
 })
