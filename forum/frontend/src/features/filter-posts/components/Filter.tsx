@@ -1,10 +1,3 @@
-
-const Filter = () => {
-    return ( 
-        <SecondaryCardWrapper>
-            <div>Filter</div>
-        </SecondaryCardWrapper>
-     );
 import SecondaryCardWrapper from "@/components/SecondaryCardWrapper"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
