@@ -83,7 +83,7 @@ export const postsRoutes = new Elysia({ prefix: "/posts" })
 
   .post(
     "/:id/attend",
-    async ({ params, body, user, set }) => {
+    async ({ params, user, set }) => {
       if (!user) {
         set.status = 401
         return "Unauthorized"
@@ -92,8 +92,6 @@ export const postsRoutes = new Elysia({ prefix: "/posts" })
       return await toggleAttendance(params.id, user.id)
     },
     {
-      body: t.Object({
-        status: t.Union(postAttendeeStatuses.map((s) => t.Literal(s))),
-      }),
+      params: t.Object({ id: t.String() }),
     },
   )
