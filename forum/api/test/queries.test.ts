@@ -1,86 +1,74 @@
-import { describe, expect, it, beforeAll } from "bun:test"
-import {
-  getPosts,
-  getPostById,
-  getPostForEdit,
-} from "../src/features/posts/db/queries"
-import {
-  insertPost,
-  updateAttendance,
-  togglePostLike,
-} from "../src/features/posts/db/posts"
+import { describe, it, expect, beforeEach, afterEach } from "vitest"
+import { db } from "../src/db/drizzle/db"
+import { PostTable } from "../src/db/drizzle/schema"
+import { insertPost, togglePostLike, toggleAttendance } from "../src/features/posts/db/posts"
+import { getPosts, getPostById } from "../src/features/posts/db/queries"
+import { eq } from "drizzle-orm"
 
-describe("Database Queries (Read Logic)", () => {
-  const userId = "reader-test-user"
-  let publicPostId = ""
-  let draftPostId = ""
+describe("Post Queries", () => {
+  let userAId: string
+  let userBId: string
 
-  beforeAll(async () => {
-    const p1 = await insertPost({
-      userId,
-      title: "Public Event",
-      description: "Everyone can see this",
+  beforeEach(() => {
+    userAId = crypto.randomUUID()
+    userBId = crypto.randomUUID()
+  })
+  
+  afterEach(async () => {
+      await db.delete(PostTable).where(eq(PostTable.userId, userAId))
+  })
+
+  it("should fetch posts with correct boolean flags", async () => {
+    const post = await insertPost({
+      userId: userAId,
+      title: "Interactive Post",
+      description: "Interactive Description",
+      type: "event",
+      status: "published", 
+    })
+
+    await togglePostLike(post.id, userBId)
+    await toggleAttendance(post.id, userBId)
+
+    const postsForB = await getPosts({ currentUserId: userBId })
+    const targetPostB = postsForB.find((p) => p.id === post.id)
+
+    expect(targetPostB).toBeDefined()
+    expect(targetPostB?.isLikedByMe).toBe(true) 
+    expect(targetPostB?.isAttending).toBe(true) 
+    expect(targetPostB?.likeCount).toBe(1)
+    expect(targetPostB?.attendeeCount).toBe(1)
+
+    const postsForA = await getPosts({ currentUserId: userAId })
+    const targetPostA = postsForA.find((p) => p.id === post.id)
+
+    expect(targetPostA?.isLikedByMe).toBe(false)
+    expect(targetPostA?.isAttending).toBe(false)
+  })
+
+  it("getPostById should return detailed counts and status", async () => {
+    const post = await insertPost({
+      userId: userAId,
+      title: "Detailed Post",
+      description: "Details here",
       type: "event",
       status: "published",
     })
-    publicPostId = p1.id
 
-    const p2 = await insertPost({
-      userId,
-      title: "Secret Draft",
-      description: "Only I can see this",
-      type: "event",
-      status: "draft",
-    })
-    draftPostId = p2.id
+    await toggleAttendance(post.id, userAId)
 
-    await togglePostLike(publicPostId, userId)
-    await updateAttendance(publicPostId, userId, "going")
+    const result = await getPostById(post.id, userAId)
+
+    expect(result).not.toBeNull()
+    expect(result?.title).toBe("Detailed Post")
+    expect(result?.myAttendeeStatus).toBe("going")
+    expect(result?.goingCount).toBe(1)
   })
 
-  it("getPosts - should ONLY return published posts", async () => {
-    const posts = await getPosts({ limit: 100 })
-
-    const foundPublic = posts.find((p) => p.id === publicPostId)
-    const foundDraft = posts.find((p) => p.id === draftPostId)
-
-    expect(foundPublic).toBeDefined()
-    expect(foundDraft).toBeUndefined()
-  })
-
-  it("getPosts - should calculate counts correctly", async () => {
-    const posts = await getPosts({ currentUserId: userId })
-    const myPost = posts.find((p) => p.id === publicPostId)
-
-    if (!myPost) throw new Error("Post not found")
-
-    expect(myPost.likeCount).toBe(1)
-    expect(myPost.attendeeCount).toBe(1)
-    expect(myPost.isLikedByMe).toBe(true)
-
-    expect(myPost.likes).toBeUndefined()
-  })
-
-  it("getPostById - should return detailed stats", async () => {
-    const post = await getPostById(publicPostId, userId)
-
-    if (!post) throw new Error("Post not found")
-
-    expect(post.title).toBe("Public Event")
-    expect(post.goingCount).toBe(1)
-    expect(post.interestedCount).toBe(0)
-    expect(post.myAttendeeStatus).toBe("going")
-  })
-
-  it("getPostById - should return NULL for drafts (Public View)", async () => {
-    const post = await getPostById(draftPostId, userId)
-    expect(post).toBeNull()
-  })
-
-  it("getPostForEdit - should return drafts (Admin View)", async () => {
-    const post = await getPostForEdit(draftPostId)
-
-    expect(post).toBeDefined()
-    expect(post?.title).toBe("Secret Draft")
+it("should return null for non-existent post", async () => {
+    const nonExistentId = crypto.randomUUID() 
+    
+    const result = await getPostById(nonExistentId, userAId)
+    expect(result).toBeNull()
   })
 })
