@@ -25,6 +25,7 @@ const CreatePostForm = () => {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const [type, setType] = useState("event")
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) return alert("Geolocation not supported")
     setIsSearching(true)
