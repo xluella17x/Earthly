@@ -10,6 +10,41 @@ import { MapPin, Loader2, X, Navigation } from "lucide-react"
 const CreatePostForm = () => {
   const [postType, setPostType] = useState("Event")
   const types = ["Event", "Win", "Tip"]
+  const handleCurrentLocation = () => {
+    if (!navigator.geolocation) return alert("Geolocation not supported")
+    setIsSearching(true)
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      const { latitude, longitude } = pos.coords
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`,
+        )
+        const data = await res.json()
+        const city =
+          data.address.city ||
+          data.address.town ||
+          data.address.village ||
+          "Unknown Area"
+        const suburb = data.address.suburb || ""
+        const name = suburb ? `${suburb}, ${city}` : city
+
+        const locData = { name, lat: latitude, lng: longitude }
+        setSelectedLocation(locData)
+        setLocationQuery(name)
+      } catch (e) {
+        const locData = {
+          name: `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
+          lat: latitude,
+          lng: longitude,
+        }
+        setSelectedLocation(locData)
+        setLocationQuery(locData.name)
+      } finally {
+        setIsSearching(false)
+      }
+    })
+  }
+
   const clearLocation = () => {
     setSelectedLocation(null)
     setLocationQuery("")
