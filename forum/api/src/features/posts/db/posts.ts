@@ -63,22 +63,14 @@ export async function deletePost(id: string) {
 
 export async function togglePostLike(postId: string, userId: string) {
   return await db.transaction(async (trx) => {
-    const existing = await trx.query.PostLikeTable.findFirst({
-      where: and(
-        eq(PostLikeTable.postId, postId),
-        eq(PostLikeTable.userId, userId),
-      ),
-    })
+    const deleted = await trx
+      .delete(PostLikeTable)
+      .where(
+        and(eq(PostLikeTable.postId, postId), eq(PostLikeTable.userId, userId)),
+      )
+      .returning()
 
-    if (existing) {
-      await trx
-        .delete(PostLikeTable)
-        .where(
-          and(
-            eq(PostLikeTable.postId, postId),
-            eq(PostLikeTable.userId, userId),
-          ),
-        )
+    if (deleted.length > 0) {
       return { liked: false }
     } else {
       await trx.insert(PostLikeTable).values({ postId, userId })
