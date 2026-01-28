@@ -72,10 +72,14 @@ export async function togglePostLike(postId: string, userId: string) {
 
     if (deleted.length > 0) {
       return { liked: false }
-    } else {
-      await trx.insert(PostLikeTable).values({ postId, userId })
-      return { liked: true }
     }
+
+    await trx
+      .insert(PostLikeTable)
+      .values({ postId, userId })
+      .onConflictDoNothing()
+
+    return { liked: true }
   })
 }
 
