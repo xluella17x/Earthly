@@ -62,6 +62,26 @@ const CreatePostForm = () => {
         />
         <Button variant={"secondary"} type="submit">
           Create Post
+        <div className="flex flex-col gap-1">
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className={cn(
+              "rounded-lg p-2 bg-card text-card-foreground border focus:border-ring outline-none transition-colors",
+              isTouched && !isDescValid
+                ? "border-red-500"
+                : "border-transparent",
+            )}
+            placeholder="Write details... (min 5 chars)"
+            rows={6}
+          />
+          {isTouched && !isDescValid && (
+            <span className="text-xs text-red-500 px-1">
+              Description must be at least 5 characters
+            </span>
+          )}
+        </div>
+
         <Button variant="secondary" type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Posting..." : "Create Post"}
         </Button>
