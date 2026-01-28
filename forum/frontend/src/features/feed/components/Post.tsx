@@ -22,5 +22,5 @@ function getRelativeTime(dateString: string | undefined) {
     return rtf.format(-Math.floor(diffInSeconds / 86400), "day")
   return date.toLocaleDateString("en-UK", { day: "numeric", month: "short" })
 }
- 
-export default Post;
+
+export default Post
