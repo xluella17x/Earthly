@@ -42,6 +42,11 @@ export async function getPosts({
     isLikedByMe: currentUserId
       ? post.likes.some((like) => like.userId === currentUserId)
       : false,
+
+    isAttending: currentUserId
+      ? post.attendees.some((a) => a.userId === currentUserId)
+      : false,
+
     likes: undefined,
     attendees: undefined,
   }))
