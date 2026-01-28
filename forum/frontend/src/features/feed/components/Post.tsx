@@ -35,6 +35,8 @@ interface PostProps {
   isLikedByMe?: boolean
   isAttending?: boolean
 }
+
+const Post = ({
   id,
   title = "Untitled Post",
   description = "",
@@ -45,4 +47,8 @@ interface PostProps {
   attendeeCount = 0,
   isLikedByMe = false,
   isAttending = false,
+}: PostProps) => {
+  return (
+  )
+}
 export default Post
