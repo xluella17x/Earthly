@@ -9,7 +9,7 @@ const Location = () => {
         <SecondaryWrapper className="bg-secondary text-secondary-foreground">
             <p>
                 <span>Your Community: </span>
-                <span>{user.location}</span>
+                <span className="font-semibold">{user.location}</span>
             </p>
         </SecondaryWrapper>
      );
