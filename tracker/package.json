@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "node index.js",
+    "start": "node ./server/index.js",
     "dev": "nodemon -L ./server/index.js",
     "setup-db": "node server/db/setup.js",
     "test": "jest --watchAll --detectOpenHandles --runInBand --verbose",
@@ -19,6 +19,8 @@
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2",
     "nodemon": "^3.1.11",
     "pg": "^8.17.2"
   }

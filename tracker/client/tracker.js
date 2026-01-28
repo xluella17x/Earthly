@@ -68,10 +68,10 @@ const updateStats = async () => {
         const response = await fetch("http://localhost:3000/tracker", options);
         const responseData = await response.json();
 
-        co2saved.textContent = 'CO2 Saved: ' + responseData['co2 Saved'].toString() + ' kg';
-        waterSaved.textContent = 'Water Saved: ' + responseData['Water Saved'].toString() + ' L';
-        electricitySaved.textContent = 'Electricity Saved: ' + responseData['Electricity Saved'].toString() + ' kWh';
-        landfillSaved.textContent = 'Landfill Saved: ' + responseData['Landfill Saved'].toString() + ' kg';
+        co2saved.textContent = 'CO2 Saved: ' + responseData.data['co2 Saved'].toString() + ' kg';
+        waterSaved.textContent = 'Water Saved: ' + responseData.data['Water Saved'].toString() + ' L';
+        electricitySaved.textContent = 'Electricity Saved: ' + responseData.data['Electricity Saved'].toString() + ' kWh';
+        landfillSaved.textContent = 'Landfill Saved: ' + responseData.data['Landfill Saved'].toString() + ' kg';
 
     } catch (err) {
         console.log(err);
@@ -92,14 +92,14 @@ const updateFunFact = async () => {
         const response = await fetch("http://localhost:3000/tracker", options);
         const responseData = await response.json();
 
-        let planeMiles = (responseData['co2 Saved']/24.04).toFixed(1);
-        let poolsFilled = (responseData['Water Saved']/2500000).toFixed(1);
-        let homesPowered = (responseData['Electricity Saved']/8.5).toFixed(1);
-        let babyElephantsMass = (responseData['Landfill Saved']/105).toFixed(1);
+        let planeMiles = (responseData.data['co2 Saved']/24.04).toFixed(1);
+        let bottlesFilled = (responseData.data['Water Saved']/0.5);
+        let homesPowered = (responseData.data['Electricity Saved']/8.5).toFixed(1);
+        let babyElephantsMass = (responseData.data['Landfill Saved']/105).toFixed(1);
 
         const funFacts = [
             `Your community has saved CO2 emissions equivalent to ${planeMiles} miles of plane travel!`,
-            `Your community has saved enough water to fill ${poolsFilled} olympic swimming pools!`,
+            `Your community has saved enough water to fill ${bottlesFilled} bottles!`,
             `Your community has saved enough electricity to power ${homesPowered} homes for a day!`,
             `Your community has prevented the same mass of waste as ${babyElephantsMass} baby elephants going to landfill!`
         ]
