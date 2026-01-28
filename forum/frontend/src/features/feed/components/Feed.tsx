@@ -19,6 +19,9 @@ const Feed = ({ filter }: FeedProps) => {
     },
   })
 
+  if (isLoading) return <div className="text-center p-8">Loading feed...</div>
+  if (error) return <div className="text-destructive p-8">Error loading posts.</div>
+
   return (
   )
 }
