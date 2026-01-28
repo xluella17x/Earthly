@@ -1,3 +1,4 @@
+import { fetcher } from "@/lib/api"
 function getRelativeTime(dateString: string | undefined) {
   if (!dateString) return "Just now"
   const date = new Date(dateString)
