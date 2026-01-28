@@ -62,7 +62,10 @@ export const postsRoutes = new Elysia({ prefix: "/posts" })
       body: t.Object({
         title: t.String(),
         description: t.String(),
-        locationName: t.Optional(t.String()),
+        locationName: t.String({
+          minLength: 1,
+          error: "Location is required",
+        }),
         type: t.Union(postTypes.map((type) => t.Literal(type))),
       }),
     },
