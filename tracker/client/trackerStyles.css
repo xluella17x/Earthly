@@ -210,13 +210,18 @@ body {
     transition: 0.2s ease, transform 0.1s ease;
 }
 
-.date:hover, .date.active { 
-    background: rgba(137, 152, 109, 0.85); 
-    color: #000;
+.date:not(.inactive):hover,
+.date.active {
+    background: rgba(137, 152, 109, 0.85);
     transform: scale(1.05);
 }
 
-.date.inactive { color: #000; }
+
+.date.inactive {
+    color: rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+}
+
 
 /* FORMS & CONTAINERS */
 .container {
