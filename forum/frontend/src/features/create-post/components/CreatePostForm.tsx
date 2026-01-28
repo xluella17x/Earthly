@@ -10,6 +10,21 @@ import { MapPin, Loader2, X, Navigation } from "lucide-react"
 const CreatePostForm = () => {
   const [postType, setPostType] = useState("Event")
   const types = ["Event", "Win", "Tip"]
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsTouched(true)
+    if (!isValid) return
+
+    setIsSubmitting(true)
+    mutate({
+      title,
+      description,
+      type,
+      locationName: selectedLocation!.name,
+      latitude: selectedLocation!.lat,
+      longitude: selectedLocation!.lng,
+    })
+  }
 
   return (
     <SecondaryMutedCardWrapper>
