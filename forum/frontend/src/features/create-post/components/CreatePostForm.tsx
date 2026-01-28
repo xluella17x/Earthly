@@ -10,6 +10,7 @@ import { MapPin, Loader2, X, Navigation } from "lucide-react"
 const CreatePostForm = () => {
   const [postType, setPostType] = useState("Event")
   const types = ["Event", "Win", "Tip"]
+  const queryClient = useQueryClient()
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) return alert("Geolocation not supported")
     setIsSearching(true)
