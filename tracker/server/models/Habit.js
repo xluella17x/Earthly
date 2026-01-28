@@ -94,7 +94,7 @@ class Habit {
         'Electricity Saved': electricitySaved,
         'Landfill Saved': landfillSaved,
       }   
-  }
+    }
 }
 
 module.exports = { Habit };

@@ -68,10 +68,10 @@ const updateStats = async () => {
         const response = await fetch("http://localhost:3000/tracker", options);
         const responseData = await response.json();
 
-        co2saved.textContent = 'CO2 Saved: ' + responseData.data['co2 Saved'].toString() + ' kg';
-        waterSaved.textContent = 'Water Saved: ' + responseData.data['Water Saved'].toString() + ' L';
-        electricitySaved.textContent = 'Electricity Saved: ' + responseData.data['Electricity Saved'].toString() + ' kWh';
-        landfillSaved.textContent = 'Landfill Saved: ' + responseData.data['Landfill Saved'].toString() + ' kg';
+        co2saved.querySelector('span').textContent = responseData.data['co2 Saved'] + ' kg';
+        waterSaved.querySelector('span').textContent = responseData.data['Water Saved'] + ' L';
+        electricitySaved.querySelector('span').textContent = responseData.data['Electricity Saved'] + ' kWh';
+        landfillSaved.querySelector('span').textContent = responseData.data['Landfill Saved'] + ' kg';
 
     } catch (err) {
         console.log(err);
@@ -98,13 +98,13 @@ const updateFunFact = async () => {
         let babyElephantsMass = (responseData.data['Landfill Saved']/105).toFixed(1);
 
         const funFacts = [
-            `Your community has saved CO2 emissions equivalent to ${planeMiles} miles of plane travel!`,
-            `Your community has saved enough water to fill ${bottlesFilled} bottles!`,
-            `Your community has saved enough electricity to power ${homesPowered} homes for a day!`,
-            `Your community has prevented the same mass of waste as ${babyElephantsMass} baby elephants going to landfill!`
+            `enough CO2 to travel ${planeMiles} miles by plane!`,
+            `enough water to fill ${bottlesFilled} bottles!`,
+            `enough electricity to power ${homesPowered} homes for a day!`,
+            `enough landfill waste equivalent to ${babyElephantsMass} baby elephants!`
         ]
 
-        funFact.textContent = funFacts[Math.floor(Math.random() * 4)];
+        funFact.textContent = funFacts[Math.floor(Math.random() * funFacts.length)];
 
     } catch (err) {
         console.log(err);
