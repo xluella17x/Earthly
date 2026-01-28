@@ -10,6 +10,12 @@ import { MapPin, Loader2, X, Navigation } from "lucide-react"
 const CreatePostForm = () => {
   const [postType, setPostType] = useState("Event")
   const types = ["Event", "Win", "Tip"]
+  const clearLocation = () => {
+    setSelectedLocation(null)
+    setLocationQuery("")
+    setSearchResults([])
+  }
+
   const { mutate } = useMutation({
     mutationFn: async (newPost: any) => {
       return fetcher("/posts", {
