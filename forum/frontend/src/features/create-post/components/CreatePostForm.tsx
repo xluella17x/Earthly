@@ -55,11 +55,6 @@ const CreatePostForm = () => {
             )
           })}
         </div>
-        <textarea
-          className="rounded-lg p-2 bg-card text-card-foreground"
-          placeholder="Write more details about your post here..."
-          rows={6}
-        />
         <Button variant={"secondary"} type="submit">
           Create Post
 
