@@ -10,6 +10,28 @@ import { MapPin, Loader2, X, Navigation } from "lucide-react"
 const CreatePostForm = () => {
   const [postType, setPostType] = useState("Event")
   const types = ["Event", "Win", "Tip"]
+  const { mutate } = useMutation({
+    mutationFn: async (newPost: any) => {
+      return fetcher("/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newPost),
+      })
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["posts"] })
+      setTitle("")
+      setDescription("")
+      clearLocation()
+      setIsTouched(false)
+      setIsSubmitting(false)
+    },
+    onError: (error) => {
+      alert("Failed to post: " + error)
+      setIsSubmitting(false)
+    },
+  })
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setIsTouched(true)
