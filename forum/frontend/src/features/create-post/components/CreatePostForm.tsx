@@ -33,6 +33,25 @@ const CreatePostForm = () => {
   const isLocationValid = !!selectedLocation
   const isValid = isTitleValid && isDescValid && isLocationValid
 
+  const handleSearch = async () => {
+    if (!locationQuery.trim()) return
+    setIsSearching(true)
+    setShowDropdown(true)
+    const viewbox = "-0.51,51.28,0.33,51.69"
+
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locationQuery)}&limit=5&viewbox=${viewbox}&bounded=0&countrycodes=gb`,
+      )
+      const data = await res.json()
+      setSearchResults(data)
+    } catch (e) {
+      console.error("Search failed", e)
+    } finally {
+      setIsSearching(false)
+    }
+  }
+
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) return alert("Geolocation not supported")
     setIsSearching(true)
