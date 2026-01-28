@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { fetcher } from "@/lib/api"
 import { cn } from "@/lib/utils"
+import { POST_TYPE_COLORS, POST_TYPES } from "@/lib/constants"
 import { MapPin, Loader2, X, Navigation } from "lucide-react"
 
 const CreatePostForm = () => {
