@@ -70,6 +70,17 @@ const Post = ({
     <SecondaryCardWrapper>
       <div className="flex flex-col gap-2 w-full">
         <div className="flex justify-between items-start gap-4">
+          <div className="flex items-center gap-2 flex-wrap">
+            <h3 className="text-lg font-bold leading-tight">{title}</h3>
+            <span
+              className={cn(
+                "px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide border",
+                POST_TYPE_COLORS[safeType as keyof typeof POST_TYPE_COLORS],
+              )}
+            >
+              {safeType}
+            </span>
+          </div>
         </div>
       </div>
     </SecondaryCardWrapper>
