@@ -62,6 +62,10 @@ const CreatePostForm = () => {
         />
         <Button variant={"secondary"} type="submit">
           Create Post
+                {isSearching && (
+                  <Loader2 className="size-3 animate-spin" />
+                )}
+
                 {locationQuery && !isSearching && (
                   <button
                     type="button"
