@@ -49,6 +49,11 @@ const Post = ({
   isAttending = false,
 }: PostProps) => {
   const timeAgo = getRelativeTime(createdAt)
+  const safeType =
+    type && POST_TYPE_COLORS[type as keyof typeof POST_TYPE_COLORS]
+      ? type
+      : "event"
+
   return (
     <SecondaryCardWrapper>
     </SecondaryCardWrapper>
