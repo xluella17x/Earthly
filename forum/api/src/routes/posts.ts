@@ -9,7 +9,7 @@ import { getPosts, getPostById } from "../features/posts/db/queries"
 import {
   insertPost,
   togglePostLike,
-  updateAttendance,
+  toggleAttendance,
 } from "../features/posts/db/posts"
 
 export const postsRoutes = new Elysia({ prefix: "/posts" })
@@ -84,7 +84,7 @@ export const postsRoutes = new Elysia({ prefix: "/posts" })
         return "Unauthorized"
       }
 
-      return await updateAttendance(params.id, user.id, body.status as any)
+      return await toggleAttendance(params.id, user.id)
     },
     {
       body: t.Object({
