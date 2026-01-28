@@ -67,6 +67,8 @@ export const postsRoutes = new Elysia({ prefix: "/posts" })
           error: "Location is required",
         }),
         type: t.Union(postTypes.map((type) => t.Literal(type))),
+        latitude: t.Optional(t.Number()), 
+        longitude: t.Optional(t.Number()), 
       }),
     },
   )
