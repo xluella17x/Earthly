@@ -13,6 +13,8 @@ const waterSaved = document.getElementById('water-saved');
 const electricitySaved = document.getElementById('electricity-saved');
 const landfillSaved = document.getElementById('landfill-saved');
 
+const funFact = document.getElementById('fun-fact');
+
 let currentDate = new Date();
 
 const updateCalendar = () => {
@@ -49,6 +51,10 @@ const updateCalendar = () => {
     datesElement.innerHTML = datesHTML;
 }
 
+let selectedDate = null;
+
+updateCalendar();
+
 const updateStats = async () => {
     try {
         const options = {
@@ -62,8 +68,6 @@ const updateStats = async () => {
         const response = await fetch("http://localhost:3000/tracker", options);
         const responseData = await response.json();
 
-        console.log(responseData);
-
         co2saved.textContent = 'CO2 Saved: ' + responseData['co2 Saved'].toString() + ' kg';
         waterSaved.textContent = 'Water Saved: ' + responseData['Water Saved'].toString() + ' L';
         electricitySaved.textContent = 'Electricity Saved: ' + responseData['Electricity Saved'].toString() + ' kWh';
@@ -76,9 +80,38 @@ const updateStats = async () => {
 
 updateStats();
 
-let selectedDate = null;
+const updateFunFact = async () => {
+    try {
+        const options = {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        }};
+    
+        const response = await fetch("http://localhost:3000/tracker", options);
+        const responseData = await response.json();
 
-updateCalendar();
+        let planeMiles = (responseData['co2 Saved']/24.04).toFixed(1);
+        let poolsFilled = (responseData['Water Saved']/2500000).toFixed(1);
+        let homesPowered = (responseData['Electricity Saved']/8.5).toFixed(1);
+        let babyElephantsMass = (responseData['Landfill Saved']/105).toFixed(1);
+
+        const funFacts = [
+            `Your community has saved CO2 emissions equivalent to ${planeMiles} miles of plane travel!`,
+            `Your community has saved enough water to fill ${poolsFilled} olympic swimming pools!`,
+            `Your community has saved enough electricity to power ${homesPowered} homes for a day!`,
+            `Your community has prevented the same mass of waste as ${babyElephantsMass} baby elephants going to landfill!`
+        ]
+
+        funFact.textContent = funFacts[Math.floor(Math.random() * 4)];
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+updateFunFact();
 
 datesElement.addEventListener("click", (e) => {
     const dateClicked = e.target.closest(".date");
@@ -142,6 +175,7 @@ form.addEventListener('submit', async (e) => {
             second_hand_buys: dataObject.no_of_purchases
             }),
         };
+
         const response = await fetch("http://localhost:3000/tracker", options);
         const responseData = await response.json();
 
@@ -158,7 +192,35 @@ form.addEventListener('submit', async (e) => {
 
 })
 
+// Incomplete or erroneous form handling
+
+form.addEventListener('submit', function(e) {
+    const recyclingYes = document.getElementById('recycling_yes').checked;
+    const litterYes = document.getElementById('litter_yes').checked;
+    const secondHandYes = document.getElementById('second_hand_buy_yes').checked;
+  
+    const noOfBoxes = Number(document.getElementById('no_of_boxes').value);
+    const noOfBags = Number(document.getElementById('no_of_bags').value);
+    const noOfPurchases = Number(document.getElementById('no_of_purchases').value);
+  
+    if (recyclingYes && (isNaN(noOfBoxes) || noOfBoxes <= 0)) {
+      e.preventDefault();
+      alert('Please enter a number greater than 0 for recycling boxes.');
+    }
+  
+    if (litterYes && (isNaN(noOfBags) || noOfBags <= 0)) {
+      e.preventDefault();
+      alert('Please enter a number greater than 0 for litter bags.');
+    }
+  
+    if (secondHandYes && (isNaN(noOfPurchases) || noOfPurchases <= 0)) {
+      e.preventDefault();
+      alert('Please enter a number greater than 0 for second-hand purchases.');
+    }
+});
+  
 closeSuccessBtn.addEventListener('click', (e) => {
     closeSuccessPopup();
     updateStats();
+    updateFunFact();
 })

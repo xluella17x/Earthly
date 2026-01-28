@@ -32,7 +32,7 @@
         <div class="grid-box">
             <div class="row2-col1-content">
                 <div class="greeting">
-                  <p>Hi, Sam</p>
+                  <p id="welcomeMessage">Hi, Sam</p>
                 </div>
               
                 <div class="green-streak">
@@ -141,7 +141,7 @@
                           value="yes"
                           required
                         />
-          
+
                         <label for="recycling_no">No</label>
                         <input
                           type="radio"
@@ -173,7 +173,7 @@
                           id="litter_yes"
                           name="litter_pick"
                           value="'yes"
-                        />
+                          required />
           
                         <label for="litter_no">No</label>
                         <input
@@ -253,6 +253,7 @@
                           id="second_hand_buy_yes"
                           name="second_hand_buy"
                           value="yes"
+                          required
                         />
           
                         <label for="second_hand_buy_no">No</label>
@@ -302,7 +303,7 @@
                 <p id="landfill-saved">Landfill Saved:</p>
               </div>
             <div class="info-card">
-                <p>Your community has saved enough electricity this week to power Buckingham Palace for a month!</p>
+                <p id="fun-fact"></p>
             </div>
         </div>
     </main>
