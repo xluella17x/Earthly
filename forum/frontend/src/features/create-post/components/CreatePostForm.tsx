@@ -13,6 +13,12 @@ const CreatePostForm = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
+  const [locationQuery, setLocationQuery] = useState("")
+  const [selectedLocation, setSelectedLocation] = useState<{
+    name: string
+    lat: number
+    lng: number
+  } | null>(null)
   const [type, setType] = useState("event")
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) return alert("Geolocation not supported")
