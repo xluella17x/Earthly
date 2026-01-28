@@ -20,6 +20,7 @@ const CreatePostForm = () => {
     lng: number
   } | null>(null)
   const [searchResults, setSearchResults] = useState<any[]>([])
+  const [isSearching, setIsSearching] = useState(false)
   const [type, setType] = useState("event")
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) return alert("Geolocation not supported")
