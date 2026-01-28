@@ -35,4 +35,14 @@ interface PostProps {
   isLikedByMe?: boolean
   isAttending?: boolean
 }
+  id,
+  title = "Untitled Post",
+  description = "",
+  type = "event",
+  locationName,
+  createdAt,
+  likeCount = 0,
+  attendeeCount = 0,
+  isLikedByMe = false,
+  isAttending = false,
 export default Post
