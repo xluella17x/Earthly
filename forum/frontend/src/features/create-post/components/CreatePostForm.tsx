@@ -70,6 +70,22 @@ const CreatePostForm = () => {
                     : "",
                 )}
               />
+              <input
+                type="text"
+                value={locationQuery}
+                onChange={(e) => {
+                  setLocationQuery(e.target.value)
+                  if (selectedLocation) setSelectedLocation(null)
+                }}
+                className={cn(
+                  "w-full rounded-lg py-2 pl-9 pr-10 bg-card text-card-foreground border focus:border-ring outline-none transition-colors",
+                  isTouched && !isLocationValid
+                    ? "border-red-500"
+                    : "border-transparent",
+                )}
+                placeholder="Search area (e.g. Victoria)"
+              />
+
                 {isSearching && (
                   <Loader2 className="size-3 animate-spin" />
                 )}
