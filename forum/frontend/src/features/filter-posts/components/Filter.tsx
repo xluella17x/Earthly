@@ -16,6 +16,7 @@ const Filter = ({ currentFilter, onFilterChange }: FilterProps) => {
         <div className="flex flex-row gap-2 flex-wrap">
           <Button
             variant="secondary"
+            onClick={() => onFilterChange(undefined)}
             className={cn(
               "h-8 px-3 text-xs  transition-colors",
               !currentFilter 
@@ -25,6 +26,25 @@ const Filter = ({ currentFilter, onFilterChange }: FilterProps) => {
           >
             All
           </Button>
+
+          {POST_TYPES.map((t) => {
+            const isActive = currentFilter === t.value
+            return (
+              <Button
+                key={t.value}
+                variant="secondary"
+                onClick={() => onFilterChange(t.value)}
+                className={cn(
+                  "h-8 px-3 text-xs border transition-colors",
+                  isActive 
+                    ? POST_TYPE_COLORS[t.value as keyof typeof POST_TYPE_COLORS]
+                    : "border-transparent bg-transparent"
+                )}
+              >
+                {t.label}s
+              </Button>
+            )
+          })}
         </div>
       </div>
     </SecondaryCardWrapper>
