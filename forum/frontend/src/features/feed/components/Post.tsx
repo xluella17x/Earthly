@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils"
 import { MapPin, Heart, Users, Clock } from "lucide-react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { fetcher } from "@/lib/api"
+import { POST_TYPE_COLORS } from "@/lib/constants"
+
 function getRelativeTime(dateString: string | undefined) {
   if (!dateString) return "Just now"
   const date = new Date(dateString)
