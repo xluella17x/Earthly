@@ -114,6 +114,26 @@ const Post = ({
             <Heart className={cn("size-4", isLikedByMe && "fill-current")} />
             <span className="text-xs">Like ({likeCount})</span>
           </Button>
+
+          {safeType === "event" && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => toggleAttend()}
+              disabled={isAttendingLoading}
+              className={cn(
+                "h-8 px-2 transition-colors gap-1.5",
+                isAttending
+                  ? "text-blue-500 hover:text-blue-600 hover:bg-blue-50"
+                  : " hover:text-blue-500 hover:bg-blue-50",
+              )}
+            >
+              <Users className={cn("size-4", isAttending && "fill-current")} />
+              <span className="text-xs">
+                {isAttending ? "I'm attending" : "Attend"} ({attendeeCount})
+              </span>
+            </Button>
+          )}
         </div>
       </div>
     </SecondaryCardWrapper>
