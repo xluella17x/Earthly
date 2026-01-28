@@ -7,5 +7,5 @@ interface FeedProps {
 }
 
 }
- 
-export default Feed;
+
+export default Feed
