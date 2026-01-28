@@ -1,3 +1,4 @@
+import SecondaryCardWrapper from "@/components/SecondaryCardWrapper"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { MapPin, Heart, Users, Clock } from "lucide-react"
