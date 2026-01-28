@@ -30,6 +30,10 @@ const Feed = ({ filter }: FeedProps) => {
         </div>
       )}
 
+      {posts?.map((post: any) => (
+        <Post key={post.id} {...post} />
+      ))}
+    </div>
   )
 }
 
