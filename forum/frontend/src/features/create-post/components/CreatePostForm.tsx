@@ -62,6 +62,20 @@ const CreatePostForm = () => {
         />
         <Button variant={"secondary"} type="submit">
           Create Post
+            {showDropdown && searchResults.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-1 bg-card border rounded-lg shadow-lg overflow-hidden max-h-48 overflow-y-auto">
+                {searchResults.map((result, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    className="w-full text-left px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground truncate border-b last:border-0"
+                    onClick={() => selectLocation(result)}
+                  >
+                    {result.display_name}
+                  </button>
+                ))}
+              </div>
+            )}
           {isTouched && !isLocationValid && (
             <span className="text-xs text-red-500 px-1">
               Please select a location from the search or use GPS
