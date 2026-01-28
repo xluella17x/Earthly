@@ -6,6 +6,7 @@ import { wherePublicPosts } from "../permissions/posts"
 const postCardColumns = {
   id: true,
   title: true,
+  description: true,
   type: true,
   locationName: true,
   createdAt: true,
