@@ -8,13 +8,12 @@ import { POST_TYPE_COLORS, POST_TYPES } from "@/lib/constants"
 import { MapPin, Loader2, X, Navigation } from "lucide-react"
 
 const CreatePostForm = () => {
-  const [postType, setPostType] = useState("Event")
-  const types = ["Event", "Win", "Tip"]
   const queryClient = useQueryClient()
 
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
+  const [type, setType] = useState("event")
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) return alert("Geolocation not supported")
     setIsSearching(true)
