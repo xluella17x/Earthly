@@ -83,17 +83,31 @@ export async function togglePostLike(postId: string, userId: string) {
   })
 }
 
-export async function updateAttendance(
-  postId: string,
-  userId: string,
-  status: PostAttendeeStatus,
-) {
-  return await db
-    .insert(PostAttendeeTable)
-    .values({ postId, userId, status })
-    .onConflictDoUpdate({
-      target: [PostAttendeeTable.userId, PostAttendeeTable.postId],
-      set: { status, updatedAt: new Date() },
-    })
-    .returning()
+export async function toggleAttendance(postId: string, userId: string) {
+  return await db.transaction(async (trx) => {
+    const deleted = await trx
+      .delete(PostAttendeeTable)
+      .where(
+        and(
+          eq(PostAttendeeTable.postId, postId),
+          eq(PostAttendeeTable.userId, userId),
+        ),
+      )
+      .returning()
+
+    if (deleted.length > 0) {
+      return { status: "removed" }
+    }
+
+    await trx
+      .insert(PostAttendeeTable)
+      .values({
+        postId,
+        userId,
+        status: "going",
+      })
+      .onConflictDoNothing()
+
+    return { status: "going" }
+  })
 }
