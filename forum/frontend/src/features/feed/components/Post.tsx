@@ -48,6 +48,18 @@ const Post = ({
   isLikedByMe = false,
   isAttending = false,
 }: PostProps) => {
+  const queryClient = useQueryClient()
+
+  const { mutate: toggleLike, isPending: isLiking } = useMutation({
+    mutationFn: async () => fetcher(`/posts/${id}/like`, { method: "POST" }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+  })
+
+  const { mutate: toggleAttend, isPending: isAttendingLoading } = useMutation({
+    mutationFn: async () => fetcher(`/posts/${id}/attend`, { method: "POST" }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+  })
+
   const timeAgo = getRelativeTime(createdAt)
   const safeType =
     type && POST_TYPE_COLORS[type as keyof typeof POST_TYPE_COLORS]
