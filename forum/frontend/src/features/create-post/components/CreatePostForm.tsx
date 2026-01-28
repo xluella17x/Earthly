@@ -62,6 +62,14 @@ const CreatePostForm = () => {
         />
         <Button variant={"secondary"} type="submit">
           Create Post
+              <MapPin
+                className={cn(
+                  "absolute left-3 size-4",
+                  isTouched && !isLocationValid
+                    ? "text-red-500"
+                    : "",
+                )}
+              />
                 {isSearching && (
                   <Loader2 className="size-3 animate-spin" />
                 )}
