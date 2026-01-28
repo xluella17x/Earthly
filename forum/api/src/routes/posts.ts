@@ -12,6 +12,8 @@ import {
   toggleAttendance,
 } from "../features/posts/db/posts"
 
+type PostType = (typeof postTypes)[number]
+
 export const postsRoutes = new Elysia({ prefix: "/posts" })
   .derive(({ headers }) => {
     return {
@@ -24,7 +26,7 @@ export const postsRoutes = new Elysia({ prefix: "/posts" })
 
   .get("/", async ({ query, user }) => {
     const { type, limit } = query
-    const where = type ? eq(PostTable.type, type as any) : undefined
+    const where = type ? eq(PostTable.type, type as PostType) : undefined
 
     return await getPosts({
       where,
@@ -55,7 +57,7 @@ export const postsRoutes = new Elysia({ prefix: "/posts" })
         ...body,
         userId: user.id,
         status: "published",
-        type: body.type as any,
+        type: body.type as PostType,
       })
     },
     {
@@ -67,8 +69,8 @@ export const postsRoutes = new Elysia({ prefix: "/posts" })
           error: "Location is required",
         }),
         type: t.Union(postTypes.map((type) => t.Literal(type))),
-        latitude: t.Optional(t.Number()), 
-        longitude: t.Optional(t.Number()), 
+        latitude: t.Optional(t.Number()),
+        longitude: t.Optional(t.Number()),
       }),
     },
   )
