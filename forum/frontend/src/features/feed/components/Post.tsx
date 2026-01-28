@@ -23,4 +23,16 @@ function getRelativeTime(dateString: string | undefined) {
   return date.toLocaleDateString("en-UK", { day: "numeric", month: "short" })
 }
 
+interface PostProps {
+  id: string
+  title?: string
+  description?: string
+  type?: "event" | "discussion" | "announcement"
+  locationName?: string | null
+  createdAt?: string
+  likeCount?: number
+  attendeeCount?: number
+  isLikedByMe?: boolean
+  isAttending?: boolean
+}
 export default Post
