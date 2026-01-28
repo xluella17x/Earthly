@@ -62,6 +62,9 @@ const CreatePostForm = () => {
         />
         <Button variant={"secondary"} type="submit">
           Create Post
+
+        <div className="flex flex-col gap-1">
+          <div className="relative z-10" ref={dropdownRef}>
             <div className="relative flex items-center">
               <MapPin
                 className={cn(
@@ -126,11 +129,14 @@ const CreatePostForm = () => {
                 ))}
               </div>
             )}
+          </div>
           {isTouched && !isLocationValid && (
             <span className="text-xs text-red-500 px-1">
               Please select a location from the search or use GPS
             </span>
           )}
+        </div>
+
         <div className="flex flex-col gap-1">
           <textarea
             value={description}
