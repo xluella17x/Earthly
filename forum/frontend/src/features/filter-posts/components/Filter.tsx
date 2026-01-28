@@ -16,6 +16,12 @@ const Filter = ({ currentFilter, onFilterChange }: FilterProps) => {
         <div className="flex flex-row gap-2 flex-wrap">
           <Button
             variant="secondary"
+            className={cn(
+              "h-8 px-3 text-xs  transition-colors",
+              !currentFilter 
+                ? "" 
+                : "border-transparent bg-transparent"
+            )}
           >
             All
           </Button>
