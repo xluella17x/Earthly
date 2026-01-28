@@ -81,6 +81,11 @@ const Post = ({
               {safeType}
             </span>
           </div>
+          <div className="flex items-center gap-1 text-xs  shrink-0">
+            <Clock className="size-3" />
+            <span>{timeAgo}</span>
+          </div>
+        </div>
         </div>
       </div>
     </SecondaryCardWrapper>
