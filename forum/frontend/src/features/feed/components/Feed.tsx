@@ -1,4 +1,3 @@
-import SecondaryWrapper from "@/components/SecondaryWrapper";
 
 interface FeedProps {
   filter?: string
