@@ -29,26 +29,6 @@ class Habit {
       throw new Error("Commute is missing") 
     }
 
-    // if (!data.date) {
-    //   throw new Error("date is missing")
-    // }
-
-    // if (!data.postcode) { 
-    //   throw new Error("Postcode is missing") 
-    // }
-
-    // if (data.meat_free_day === null) {
-    //   throw new Error("meat free option is missing")
-    // }
-
-    // if (data.refill_cup === null) {
-    //   throw new Error("refill cup option is missing")
-    // }
-
-    // if (!data.commute || !data.date || !data.postcode || data.meat_free_day === null || data.refill_cup === null) {
-    //   throw new Error("One or more values missing")
-    // }
-
     const { date,
         user_id,
         postcode,

@@ -56,32 +56,6 @@ describe('Habit', () => {
 
             // Act & Assert
             await expect(Habit.create(incompleteHabitData)).rejects.toThrow("Commute is missing");
-            // await expect(Habit.create(incompleteHabitData)).rejects.toThrow("date is missing");
-            // await expect(Habit.create(incompleteHabitData)).rejects.toThrow("Postcode is missing");
-            // await expect(Habit.create(incompleteHabitData)).rejects.toThrow("meat free option is missing");
-            // await expect(Habit.create(incompleteHabitData)).rejects.toThrow("refill cup option is missing");
         });
     })
-    
-    // describe('stats', () => {
-    //     it('resolves with stats on successful db query', async () => {
-    //         // Arrange
-    //         const mockStats = {'co2 Saved': 1,
-    //             'Water Saved': 1,
-    //             'Electricity Saved': 1,
-    //             'Landfill Saved': 1 };
-    //         jest.spyOn(db, 'query').mockResolvedValueOnce(mockStats);
-
-    //         // Act
-    //         const result = await Habit.stats();
-
-    //         // Assert
-    //         expect(result).not.toBeInstanceOf(Habit);
-    //         expect(result['co2 Saved']).toBe(1);
-    //         expect(result['Water Saved']).toBe(1);
-    //         expect(result['Electricity Saved']).toBe(1);
-    //         expect(result['Landfill Saved']).toBe(1);
-    //         expect(db.query).toHaveBeenDCalledWith("SELECT COUNT(commute) FROM habits_table WHERE commute = '1 - Walk';", [1]);
-    //     })
-    // })
 })
