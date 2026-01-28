@@ -14,6 +14,11 @@ const Filter = ({ currentFilter, onFilterChange }: FilterProps) => {
       <div className="flex flex-col gap-2 w-full">
         <h3 className="font-semibold px-2 mb-2">Filter Posts</h3>
         <div className="flex flex-row gap-2 flex-wrap">
+          <Button
+            variant="secondary"
+          >
+            All
+          </Button>
         </div>
       </div>
     </SecondaryCardWrapper>
