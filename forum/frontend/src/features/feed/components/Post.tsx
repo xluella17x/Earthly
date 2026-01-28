@@ -98,6 +98,22 @@ const Post = ({
           {description}
         </p>
 
+        <div className="flex gap-2 mt-3 pt-3 border-t border-border/40">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => toggleLike()}
+            disabled={isLiking}
+            className={cn(
+              "h-8 px-2 transition-colors gap-1.5",
+              isLikedByMe
+                ? "text-red-500 hover:text-red-600 hover:bg-red-50"
+                : " hover:text-red-500 hover:bg-red-50",
+            )}
+          >
+            <Heart className={cn("size-4", isLikedByMe && "fill-current")} />
+            <span className="text-xs">Like ({likeCount})</span>
+          </Button>
         </div>
       </div>
     </SecondaryCardWrapper>
