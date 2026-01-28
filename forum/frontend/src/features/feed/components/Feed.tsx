@@ -23,6 +23,13 @@ const Feed = ({ filter }: FeedProps) => {
   if (error) return <div className="text-destructive p-8">Error loading posts.</div>
 
   return (
+    <div className="flex flex-col gap-4">
+      {posts?.length === 0 && (
+        <div className="text-center py-10">
+          No posts found. Be the first to post!
+        </div>
+      )}
+
   )
 }
 
