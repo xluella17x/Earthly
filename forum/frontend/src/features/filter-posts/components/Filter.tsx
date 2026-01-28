@@ -8,4 +8,9 @@ interface FilterProps {
   onFilterChange: (filter: string | undefined) => void
 }
 
+const Filter = ({ currentFilter, onFilterChange }: FilterProps) => {
+  return (
+  )
+}
+
 export default Filter
