@@ -26,6 +26,7 @@ const CreatePostForm = () => {
 
   const [type, setType] = useState("event")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isTouched, setIsTouched] = useState(false)
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) return alert("Geolocation not supported")
     setIsSearching(true)
