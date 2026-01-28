@@ -6,6 +6,9 @@ interface FeedProps {
   filter?: string
 }
 
+const Feed = ({ filter }: FeedProps) => {
+  return (
+  )
 }
 
 export default Feed
