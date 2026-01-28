@@ -13,7 +13,27 @@ const CreatePostForm = () => {
 
   return (
     <SecondaryMutedCardWrapper>
-      <form className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1">
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className={cn(
+              "rounded-lg p-2 bg-card text-card-foreground border focus:border-ring outline-none transition-colors",
+              isTouched && !isTitleValid
+                ? "border-red-500"
+                : "border-transparent",
+            )}
+            placeholder="Post Title (min 5 chars)"
+          />
+          {isTouched && !isTitleValid && (
+            <span className="text-xs text-red-500 px-1">
+              Title must be at least 5 characters
+            </span>
+          )}
+        </div>
+
         <div className="flex gap-2">
           <Button variant={"secondary"}>Event</Button>
           <Button variant={"secondary"}>Win</Button>
