@@ -62,6 +62,11 @@ const CreatePostForm = () => {
         />
         <Button variant={"secondary"} type="submit">
           Create Post
+          {isTouched && !isLocationValid && (
+            <span className="text-xs text-red-500 px-1">
+              Please select a location from the search or use GPS
+            </span>
+          )}
         <div className="flex flex-col gap-1">
           <textarea
             value={description}
