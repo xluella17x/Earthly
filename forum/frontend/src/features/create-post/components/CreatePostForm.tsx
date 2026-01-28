@@ -35,9 +35,6 @@ const CreatePostForm = () => {
         </div>
 
         <div className="flex gap-2">
-          <Button variant={"secondary"}>Event</Button>
-          <Button variant={"secondary"}>Win</Button>
-          <Button variant={"secondary"}>Tip</Button>
         </div>
         <textarea
           className="rounded-lg p-2 bg-card text-card-foreground"
