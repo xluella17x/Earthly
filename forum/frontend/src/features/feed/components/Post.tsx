@@ -48,6 +48,7 @@ const Post = ({
   isLikedByMe = false,
   isAttending = false,
 }: PostProps) => {
+  const timeAgo = getRelativeTime(createdAt)
   return (
     <SecondaryCardWrapper>
     </SecondaryCardWrapper>
