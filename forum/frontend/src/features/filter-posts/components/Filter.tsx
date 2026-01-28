@@ -1,4 +1,3 @@
-import SecondaryCardWrapper from "@/components/SecondaryCardWrapper";
 
 const Filter = () => {
     return ( 
@@ -6,6 +5,11 @@ const Filter = () => {
             <div>Filter</div>
         </SecondaryCardWrapper>
      );
+import SecondaryCardWrapper from "@/components/SecondaryCardWrapper"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { POST_TYPE_COLORS, POST_TYPES } from "@/lib/constants"
+
 }
  
 export default Filter;
