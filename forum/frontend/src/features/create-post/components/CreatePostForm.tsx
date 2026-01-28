@@ -55,8 +55,6 @@ const CreatePostForm = () => {
             )
           })}
         </div>
-        <Button variant={"secondary"} type="submit">
-          Create Post
 
         <div className="flex flex-col gap-1">
           <div className="relative z-10" ref={dropdownRef}>
