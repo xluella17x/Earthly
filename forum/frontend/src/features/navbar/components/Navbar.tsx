@@ -22,7 +22,14 @@ function NavBar() {
           ))}
         </div>
         <a href="/">
-          <img src="logo.png" alt="Logo" className="size-20 object-contain" />
+          <div className="flex gap-2 items-center">
+            <span className="font-semibold text-secondary-foreground text-2xl">Earthly</span>
+            <img
+              src="logo.png"
+              alt="Logo"
+              className="size-20 object-contain"
+            />
+          </div>
         </a>
       </nav>
     </header>
