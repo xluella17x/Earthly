@@ -86,6 +86,13 @@ const Post = ({
             <span>{timeAgo}</span>
           </div>
         </div>
+
+        {locationName && (
+          <div className="flex items-center gap-1 text-sm ">
+            <MapPin className="size-3.5" />
+            <span>{locationName}</span>
+          </div>
+        )}
         </div>
       </div>
     </SecondaryCardWrapper>
