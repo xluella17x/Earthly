@@ -33,6 +33,14 @@ const CreatePostForm = () => {
   const isLocationValid = !!selectedLocation
   const isValid = isTitleValid && isDescValid && isLocationValid
 
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      handleSearch()
+    }, 1000) 
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [locationQuery])
+
   const handleSearch = async () => {
     if (!locationQuery.trim()) return
     setIsSearching(true)
