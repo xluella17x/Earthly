@@ -34,6 +34,10 @@ const CreatePostForm = () => {
   const isValid = isTitleValid && isDescValid && isLocationValid
 
   useEffect(() => {
+    if (!locationQuery.trim() || selectedLocation?.name === locationQuery) {
+      return
+    }
+
     const delayDebounceFn = setTimeout(() => {
       handleSearch()
     }, 1000) 
