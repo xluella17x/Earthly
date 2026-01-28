@@ -68,6 +68,10 @@ const Post = ({
 
   return (
     <SecondaryCardWrapper>
+      <div className="flex flex-col gap-2 w-full">
+        <div className="flex justify-between items-start gap-4">
+        </div>
+      </div>
     </SecondaryCardWrapper>
   )
 }
