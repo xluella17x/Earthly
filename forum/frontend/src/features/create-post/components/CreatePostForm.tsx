@@ -62,6 +62,15 @@ const CreatePostForm = () => {
         />
         <Button variant={"secondary"} type="submit">
           Create Post
+                {locationQuery && !isSearching && (
+                  <button
+                    type="button"
+                    onClick={clearLocation}
+                    className="p-1 hover:bg-muted rounded-full"
+                  >
+                    <X className="size-3" />
+                  </button>
+                )}
             {showDropdown && searchResults.length > 0 && (
               <div className="absolute top-full left-0 right-0 mt-1 bg-card border rounded-lg shadow-lg overflow-hidden max-h-48 overflow-y-auto">
                 {searchResults.map((result, i) => (
