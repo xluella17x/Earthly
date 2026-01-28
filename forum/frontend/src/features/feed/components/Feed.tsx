@@ -7,6 +7,18 @@ interface FeedProps {
 }
 
 const Feed = ({ filter }: FeedProps) => {
+  const {
+    data: posts,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["posts", filter],
+    queryFn: () => {
+      const queryParams = filter ? `?type=${filter}` : ""
+      return fetcher(`/posts${queryParams}`)
+    },
+  })
+
   return (
   )
 }
