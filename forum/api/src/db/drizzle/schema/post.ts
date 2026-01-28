@@ -1,6 +1,12 @@
-import { pgTable, text, doublePrecision, pgEnum, timestamp } from "drizzle-orm/pg-core"
+import {
+  pgTable,
+  text,
+  doublePrecision,
+  pgEnum,
+  timestamp,
+} from "drizzle-orm/pg-core"
 import { relations } from "drizzle-orm"
-import { id, createdAt, updatedAt } from "../schemaHelpers"
+import { id, createdAt, updatedAt, deletedAt } from "../schemaHelpers"
 import { PostLikeTable } from "./postLike"
 import { PostAttendeeTable } from "./postAttendee"
 
@@ -25,7 +31,8 @@ export const PostTable = pgTable("posts_table", {
   lng: doublePrecision("longitude"),
   createdAt,
   updatedAt,
-deletedAt: timestamp("deleted_at", { withTimezone: true }),})
+  deletedAt,
+})
 
 export const PostRelationships = relations(PostTable, ({ many }) => ({
   likes: many(PostLikeTable),
