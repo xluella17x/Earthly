@@ -10,6 +10,13 @@ interface FilterProps {
 
 const Filter = ({ currentFilter, onFilterChange }: FilterProps) => {
   return (
+    <SecondaryCardWrapper>
+      <div className="flex flex-col gap-2 w-full">
+        <h3 className="font-semibold px-2 mb-2">Filter Posts</h3>
+        <div className="flex flex-row gap-2 flex-wrap">
+        </div>
+      </div>
+    </SecondaryCardWrapper>
   )
 }
 
