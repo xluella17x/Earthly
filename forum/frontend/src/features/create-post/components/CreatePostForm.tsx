@@ -62,6 +62,8 @@ const CreatePostForm = () => {
         />
         <Button variant={"secondary"} type="submit">
           Create Post
+        <Button variant="secondary" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Posting..." : "Create Post"}
         </Button>
       </form>
     </SecondaryMutedCardWrapper>
