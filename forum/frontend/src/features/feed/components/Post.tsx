@@ -1,3 +1,18 @@
+function getRelativeTime(dateString: string | undefined) {
+  if (!dateString) return "Just now"
+  const date = new Date(dateString)
+  const now = new Date()
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" })
+
+  if (diffInSeconds < 60) return "Just now"
+  if (diffInSeconds < 3600)
+    return rtf.format(-Math.floor(diffInSeconds / 60), "minute")
+  if (diffInSeconds < 86400)
+    return rtf.format(-Math.floor(diffInSeconds / 3600), "hour")
+  if (diffInSeconds < 604800)
+    return rtf.format(-Math.floor(diffInSeconds / 86400), "day")
+  return date.toLocaleDateString("en-UK", { day: "numeric", month: "short" })
 }
  
 export default Post;
