@@ -7,5 +7,5 @@ interface FilterProps {
   currentFilter: string | undefined
   onFilterChange: (filter: string | undefined) => void
 }
- 
-export default Filter;
+
+export default Filter
