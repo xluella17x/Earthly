@@ -4,12 +4,6 @@ import { Button } from "@/components/ui/button"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { fetcher } from "@/lib/api"
 
-const POST_TYPES = [
-  { label: "Event", value: "event" },
-  { label: "Win", value: "discussion" },
-  { label: "Tip", value: "announcement" },
-]
-
 const CreatePostForm = () => {
   const [postType, setPostType] = useState("Event")
   const types = ["Event", "Win", "Tip"]
