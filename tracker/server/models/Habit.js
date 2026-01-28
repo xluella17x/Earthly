@@ -24,6 +24,11 @@ class Habit {
   }
 
   static async create(data) {
+    
+    if (!data.commute) { 
+      throw new Error("Commute is missing") 
+    }
+
     const { date,
         user_id,
         postcode,

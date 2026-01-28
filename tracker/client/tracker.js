@@ -74,7 +74,7 @@ const updateStats = async () => {
         landfillSaved.textContent = 'Landfill Saved: ' + responseData['Landfill Saved'].toString() + ' kg';
 
     } catch (err) {
-            console.log(err);
+        console.log(err);
     }
 }
 

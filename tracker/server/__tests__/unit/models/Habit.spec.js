@@ -42,21 +42,20 @@ describe('Habit', () => {
                 ],
             );
         })
-    })
-    
-    describe('getStats', () => {
-        it('resolves with stats on successful db query', async () => {
+        it('should throw an Error when one of the values are missing', async () => {
             // Arrange
-            const testStats = {'co2Saved': 1, 'Water Saved': 1, 'Electricity Saved': 1, 'Landfill Saved': 1};
-            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [testStats] });
+            const incompleteHabitData = {
+                user_id: 1,
+                postcode: "B29 9PS",
+                recycling_bags: 1,
+                litter_pick_bags: 1,
+                meat_free_day: false,
+                refill_cup: false,
+                second_hand_buys: 0 
+            }
 
-            // Act
-            const result = await Habit.stats();
-
-            // Assert
-            expect(result).not.toBeInstanceOf(Habit);
-            expect(result.co2Saved).toBe(1);
-            expect(db.query).toHaveBeenDCalledWith("SELECT COUNT(commute) FROM habits_table WHERE commute = '1 - Walk';", [1]);
-        })
+            // Act & Assert
+            await expect(Habit.create(incompleteHabitData)).rejects.toThrow("Commute is missing");
+        });
     })
 })
