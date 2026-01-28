@@ -93,6 +93,11 @@ const Post = ({
             <span>{locationName}</span>
           </div>
         )}
+
+        <p className="text-sm whitespace-pre-wrap mt-1 text-card-foreground/90">
+          {description}
+        </p>
+
         </div>
       </div>
     </SecondaryCardWrapper>
