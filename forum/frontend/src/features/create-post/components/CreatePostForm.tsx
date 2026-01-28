@@ -11,6 +11,10 @@ const CreatePostForm = () => {
   const [postType, setPostType] = useState("Event")
   const types = ["Event", "Win", "Tip"]
   const queryClient = useQueryClient()
+
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) return alert("Geolocation not supported")
     setIsSearching(true)
