@@ -60,6 +60,17 @@ const CreatePostForm = () => {
     })
   }
 
+  const selectLocation = (result: any) => {
+    const name = result.display_name.split(",").slice(0, 2).join(",")
+    setSelectedLocation({
+      name: name,
+      lat: parseFloat(result.lat),
+      lng: parseFloat(result.lon),
+    })
+    setLocationQuery(name)
+    setShowDropdown(false)
+  }
+
   const clearLocation = () => {
     setSelectedLocation(null)
     setLocationQuery("")
