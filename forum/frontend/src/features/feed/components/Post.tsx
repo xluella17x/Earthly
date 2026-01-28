@@ -49,6 +49,9 @@ const Post = ({
   isAttending = false,
 }: PostProps) => {
   return (
+    <SecondaryCardWrapper>
+    </SecondaryCardWrapper>
   )
 }
+
 export default Post
