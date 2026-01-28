@@ -35,6 +35,25 @@ const CreatePostForm = () => {
         </div>
 
         <div className="flex gap-2">
+          {POST_TYPES.map((t) => {
+            const isSelected = type === t.value
+            return (
+              <Button
+                key={t.value}
+                type="button"
+                variant="ghost"
+                onClick={() => setType(t.value)}
+                className={cn(
+                  "flex-1 border transition-all duration-200",
+                  isSelected
+                    ? POST_TYPE_COLORS[t.value as keyof typeof POST_TYPE_COLORS]
+                    : "bg-secondary text-secondary-foreground border-transparent hover:bg-secondary/80",
+                )}
+              >
+                {t.label}
+              </Button>
+            )
+          })}
         </div>
         <textarea
           className="rounded-lg p-2 bg-card text-card-foreground"
