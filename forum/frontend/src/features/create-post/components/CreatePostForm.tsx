@@ -14,12 +14,6 @@ const CreatePostForm = () => {
   return (
     <SecondaryMutedCardWrapper>
       <form className="flex flex-col gap-4">
-        <input
-          type="text"
-          className="rounded-lg p-2 bg-card text-card-foreground"
-          placeholder="Post Title"
-        />
-        {/* i want it to say post type as like a heading i guess and then you can select event, win or tip as like buttons rather than drop down and the selected one shows different color to others*/}
         <div className="flex gap-2">
           <Button variant={"secondary"}>Event</Button>
           <Button variant={"secondary"}>Win</Button>
