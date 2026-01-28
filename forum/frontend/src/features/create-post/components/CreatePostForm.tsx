@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { fetcher } from "@/lib/api"
+import { cn } from "@/lib/utils"
 import { MapPin, Loader2, X, Navigation } from "lucide-react"
 
 const CreatePostForm = () => {
