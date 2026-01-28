@@ -62,6 +62,7 @@ const CreatePostForm = () => {
         />
         <Button variant={"secondary"} type="submit">
           Create Post
+            <div className="relative flex items-center">
               <MapPin
                 className={cn(
                   "absolute left-3 size-4",
@@ -86,6 +87,7 @@ const CreatePostForm = () => {
                 placeholder="Search area (e.g. Victoria)"
               />
 
+              <div className="absolute right-2 flex items-center gap-1">
                 {isSearching && (
                   <Loader2 className="size-3 animate-spin" />
                 )}
@@ -99,6 +101,17 @@ const CreatePostForm = () => {
                     <X className="size-3" />
                   </button>
                 )}
+                <button
+                  type="button"
+                  onClick={handleCurrentLocation}
+                  className="p-1.5 hover:bg-blue-100 text-blue-500 rounded-md transition-colors"
+                  title="Use Current Location"
+                >
+                  <Navigation className="size-4" />
+                </button>
+              </div>
+            </div>
+
             {showDropdown && searchResults.length > 0 && (
               <div className="absolute top-full left-0 right-0 mt-1 bg-card border rounded-lg shadow-lg overflow-hidden max-h-48 overflow-y-auto">
                 {searchResults.map((result, i) => (
