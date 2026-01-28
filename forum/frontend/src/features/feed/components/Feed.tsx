@@ -1,8 +1,7 @@
 import SecondaryWrapper from "@/components/SecondaryWrapper";
 
-const post = {
-    title: "Cleanup in Victoria Park",
-    
+interface FeedProps {
+  filter?: string
 }
 
 const Feed = () => {
