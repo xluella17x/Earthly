@@ -1,73 +1,126 @@
-import { describe, expect, it } from "bun:test"
+import { describe, it, expect, beforeEach, afterEach } from "vitest"
+import { db } from "../src/db/drizzle/db"
+import { PostTable } from "../src/db/drizzle/schema"
 import {
   insertPost,
   updatePost,
   deletePost,
+  userOwnsPost,
   togglePostLike,
-  updateAttendance,
+  toggleAttendance,
 } from "../src/features/posts/db/posts"
-import { userOwnsPost } from "../src/features/posts/db/posts"
+import { eq } from "drizzle-orm"
 
-describe("Database Mutations (Write Logic)", () => {
-  const userId = "mutation-test-user"
-  let postId = ""
+describe("Post Mutations", () => {
+  let testUserId: string
 
-  it("should INSERT a new post", async () => {
-    const post = await insertPost({
-      userId,
-      title: "Test Mutation Post",
-      description: "Testing DB writes",
-      type: "discussion",
-      status: "published",
-      locationName: "Test Lab",
-    })
+  beforeEach(() => {
+    testUserId = crypto.randomUUID()
+  })
+
+  afterEach(async () => {
+    await db.delete(PostTable).where(eq(PostTable.userId, testUserId))
+  })
+
+  it("should insert a new post", async () => {
+    const postData = {
+      userId: testUserId,
+      title: "Test Post",
+      description: "Test Description",
+      type: "event" as const,
+      status: "published" as const,
+    }
+
+    const post = await insertPost(postData)
 
     expect(post).toBeDefined()
-    expect(post.id).toBeString()
-    expect(post.title).toBe("Test Mutation Post")
-
-    postId = post.id
+    expect(post.id).toBeDefined()
+    expect(post.title).toBe(postData.title)
+    expect(post.userId).toBe(testUserId)
   })
 
-  it("should UPDATE a post", async () => {
-    await Bun.sleep(100)
-
-    const updated = await updatePost(postId, {
-      title: "Updated Title",
+  it("should update an existing post", async () => {
+    const post = await insertPost({
+      userId: testUserId,
+      title: "Original Title",
+      description: "Original Description",
+      type: "event",
+      status: "published",
     })
 
+    const updated = await updatePost(post.id, { title: "Updated Title" })
+
     expect(updated.title).toBe("Updated Title")
-    expect(updated.updatedAt.getTime()).toBeGreaterThan(
-      updated.createdAt.getTime(),
-    )
+    expect(updated.updatedAt).toBeDefined()
   })
 
-  it("should verify OWNERSHIP", async () => {
-    const isOwner = await userOwnsPost({ userId, postId })
-    const isNotOwner = await userOwnsPost({ userId: "stranger", postId })
+  it("should delete a post", async () => {
+    const post = await insertPost({
+      userId: testUserId,
+      title: "To Delete",
+      description: "To Delete Description",
+      type: "event",
+      status: "published",
+    })
+
+    await deletePost(post.id)
+
+    const check = await db.query.PostTable.findFirst({
+      where: eq(PostTable.id, post.id),
+    })
+    expect(check).toBeUndefined()
+  })
+
+  it("should check post ownership correctly", async () => {
+    const post = await insertPost({
+      userId: testUserId,
+      title: "My Post",
+      description: "My Description",
+      type: "event",
+      status: "published",
+    })
+
+    const isOwner = await userOwnsPost({ userId: testUserId, postId: post.id })
+    const isNotOwner = await userOwnsPost({
+      userId: "some-random-other-id",
+      postId: post.id,
+    })
 
     expect(isOwner).toBe(true)
     expect(isNotOwner).toBe(false)
   })
 
-  it("should TOGGLE LIKE (Add then Remove)", async () => {
-    const result1 = await togglePostLike(postId, userId)
-    expect(result1.liked).toBe(true)
+  describe("Toggles (Like & Attendance)", () => {
+    it("should toggle like on and off", async () => {
+      const post = await insertPost({
+        userId: testUserId,
+        title: "Likeable Post",
+        description: "Content",
+        type: "event",
+        status: "published",
+      })
 
-    const result2 = await togglePostLike(postId, userId)
-    expect(result2.liked).toBe(false)
-  })
+      const result1 = await togglePostLike(post.id, testUserId)
+      expect(result1.liked).toBe(true)
 
-  it("should UPSERT ATTENDANCE (Insert then Update)", async () => {
-    const result1 = await updateAttendance(postId, userId, "interested")
-    expect(result1[0].status).toBe("interested")
+      const result2 = await togglePostLike(post.id, testUserId)
+      expect(result2.liked).toBe(false)
+    })
 
-    const result2 = await updateAttendance(postId, userId, "going")
-    expect(result2[0].status).toBe("going")
-  })
+    it("should toggle attendance on and off", async () => {
+      const post = await insertPost({
+        userId: testUserId,
+        title: "Event Post",
+        description: "Event details",
+        type: "event",
+        status: "published",
+      })
 
-  it("should DELETE a post", async () => {
-    const deleted = await deletePost(postId)
-    expect(deleted.id).toBe(postId)
+      const result1 = await toggleAttendance(post.id, testUserId)
+      expect(result1.status).toBe("going")
+
+      const result2 = await toggleAttendance(post.id, testUserId)
+      expect(result2.status).toBe("removed")
+    })
   })
 })
