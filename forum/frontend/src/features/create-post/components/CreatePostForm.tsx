@@ -45,6 +45,19 @@ const CreatePostForm = () => {
     return () => clearTimeout(delayDebounceFn)
   }, [locationQuery])
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [])
+
   const handleSearch = async () => {
     if (!locationQuery.trim()) return
     setIsSearching(true)
