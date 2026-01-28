@@ -32,7 +32,7 @@
         <div class="grid-box">
             <div class="row2-col1-content">
                 <div class="greeting">
-                  <p>Hi, Sam</p>
+                  <p id="welcomeMessage">Hi, Sam</p>
                 </div>
               
                 <div class="green-streak">
@@ -91,7 +91,7 @@
                           id="commute_walk"
                           name="commute"
                           value="1 - Walk"
-                        />
+                          required />
           
                         <label for="commute_cycle">Cycle</label>
                         <input
@@ -138,7 +138,7 @@
                           id="recycling_yes"
                           name="recycling"
                           value="yes"
-                        />
+                          required />
           
                         <label for="recycling_no">No</label>
                         <input
@@ -170,7 +170,7 @@
                           id="litter_yes"
                           name="litter_pick"
                           value="'yes"
-                        />
+                          required />
           
                         <label for="litter_no">No</label>
                         <input
@@ -202,6 +202,7 @@
                           id="meat_free_yes"
                           name="meat_free"
                           value="true"
+                          required
                         />
           
                         <label for="meat_free_no">No</label>
@@ -225,6 +226,7 @@
                           id="refill_cup_yes"
                           name="refill_cup"
                           value="true"
+                          required
                         />
           
                         <label for="refill_cup_no">No</label>
@@ -248,6 +250,7 @@
                           id="second_hand_buy_yes"
                           name="second_hand_buy"
                           value="yes"
+                          required
                         />
           
                         <label for="second_hand_buy_no">No</label>
@@ -297,7 +300,7 @@
                 <p id="landfill-saved">Landfill Saved:</p>
               </div>
             <div class="info-card">
-                <p>Your community has saved enough electricity this week to power Buckingham Palace for a month!</p>
+                <p id="fun-fact"></p>
             </div>
         </div>
     </main>
