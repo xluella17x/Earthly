@@ -62,12 +62,21 @@ export const postsRoutes = new Elysia({ prefix: "/posts" })
     },
     {
       body: t.Object({
-        title: t.String(),
-        description: t.String(),
+        title: t.String({
+          minLength: 5,
+          error: "Title must be at least 5 characters",
+        }),
+
+        description: t.String({
+          minLength: 5,
+          error: "Description must be at least 5 characters",
+        }),
+
         locationName: t.String({
           minLength: 1,
           error: "Location is required",
         }),
+
         type: t.Union(postTypes.map((type) => t.Literal(type))),
         latitude: t.Optional(t.Number()),
         longitude: t.Optional(t.Number()),
