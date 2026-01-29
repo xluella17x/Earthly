@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db/connect');
+const db = require('../../backend/server/db/connect');
 
 const SALT_ROUNDS = 10;
 

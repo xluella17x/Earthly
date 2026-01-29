@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
- <script src="auth.js" defer></script>
-
+    <script src="auth.js" defer></script>
+    <link rel="stylesheet" href="authenticationstyles.css">
 </head>
 <header>
-    <h1>
-        Earthly
-    </h1>
+    <h1>Earthly <img src="../../logo.png" alt="Earthly Logo" class="logo"> </h1>
     <p>Small actions, big impact</p>
 </header>
-<body>
-        <form id="signup-form">
 
-        <input type="text" name="first_name" placeholder="First name" required><br><br>
-        <input type="text" name="last_name" placeholder="Last name" required><br><br>
+<body>
+    <form id="signup-form">
+
+        <input type="text" name="first_name" placeholder="First Name" required><br><br>
+
+        <input type="text" name="last_name" placeholder="Last Name" required><br><br>
 
         <input type="email" name="email_address" placeholder="Email" required><br><br>
 
@@ -30,7 +31,12 @@
 
         <button type="submit">Create Account</button>
 
-        </form>
+        <div class="divider">
+            <span>OR</span>
+        </div>
+        <a href="login.html" class="switch-link">Login</a>
+    </form>
 
 </body>
+
 </html>

@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
- <script src="auth.js" defer></script>
-
+    <script src="auth.js" defer></script>
+    <link rel="stylesheet" href="authenticationstyles.css">
 </head>
 
 <body>
+    <header>
+        <h1>Earthly <img src="../../logo.png" alt="Earthly Logo" class="logo"> </h1>
+        <p>Small actions, big impact</p>
+    </header>
+    <form id="login-form">
 
-<header>
-    <h1>
-        Earthly
-    </h1>
-    <p>Small actions, big impact</p>
-</header>
-<form id="login-form"> 
-    <label for="email">Email Address:</label><br>
-    <input type="email" id="email" name="email_address" required><br><br>
+        <input type="email" name="email_address" placeholder="Email" required><br><br>
 
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password" required><br><br>
+        <input type="password" name="password" placeholder="Password" required><br><br>
 
-    <button type="submit">Login</button>
+        <button type="submit">Login</button>
 
-</form>
+        <div class="divider">
+            <span>OR</span>
+        </div>
 
+        <a href="signup.html" class="switch-link">Create Account</a>
+    </form>
 
 </body>
+
 </html>

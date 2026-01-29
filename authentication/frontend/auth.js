@@ -41,7 +41,7 @@ if (loginForm) {
         community: user.community
       })
     );
-    window.location.href = "welcome.html";
+    window.location.href = "tracker.html";
   });
 }
 
