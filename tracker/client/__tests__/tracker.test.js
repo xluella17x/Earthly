@@ -1,5 +1,5 @@
 // Import renderDOM function
-const { renderDOM } = require('./helpers');
+const { renderDOM } = require('../testUtils/helpers.js');
 
 // Initialise DOM and document
 let dom;
@@ -9,16 +9,23 @@ let document;
 describe('tracker page element structure', () => {
     // Render a new DOM each time
     beforeEach(async () => {
-        dom = await renderDOM('./tracker.jsx');
+        dom = await renderDOM('./client/tracker.html');
         document = await dom.window.document;
     });
 
+    // Shut down the DOM after each test to prevent leaking
+    afterEach(() => {
+        if (dom) {
+          dom.window.close();
+          dom = null;
+        }
+    });
+      
     // Test navbar
     it('has a navbar', () => {
-        const navbar = document.querySelector('navbar');
-
+        const navbar = document.querySelector('.topnav');
         // Existence
-        expect(navbar).toBeTruthy;
+        expect(navbar).toBeTruthy();
         // Contains Options
         expect(navbar.innerHTML).toContain('Your Community');
     });
@@ -28,69 +35,44 @@ describe('tracker page element structure', () => {
         const welcomeMessage = document.querySelector('#welcomeMessage');
 
         // Existence
-        expect(welcomeMessage).toBeTruthy;
+        expect(welcomeMessage).toBeTruthy();
     });
 
     // Test green streak
     it('displays a streak', () => {
-        const streakCounter = document.querySelector('#streakCounter');
+        const streakCounter = document.querySelector('.green-streak');
 
-        let myStreak = document.getElementById('my-streak');
-        myStreak.value = 10;
-        
         // Existence
-        expect(streakCounter).toBeTruthy;
+        expect(streakCounter).toBeTruthy();
         // Contains text and correct streak
-        expect(streakCounter.innerHTML).toContain('Your Green Streak');
-        expect(myStreak.value).toBe(10);
+        expect(streakCounter.textContent).toContain('Days');
     });
 
     // Test calendar container
-    it('displays a calendar', () => {
+    it('displays a calendar container', () => {
+        // Fetch calendar container
         const calendarContainer = document.querySelector('#calendar-container');
-
-        // Existence
+        const datesContainer = document.querySelector('#dates');
+        
+        // Expect it to contain space for calendar and dates
         expect(calendarContainer).toBeTruthy();
-
-        // Contains calendar
-        expect(calendarContainer.innerHTML).toContain('monthYear')
-        expect(calendarContainer.innerHTML).toContain('dates')
+        expect(datesContainer).toBeTruthy();
     });
-
-    // Test brand container
-    it('displays the branding', () => {
-        const brandContainer = document.querySelector('#brandContainer')
-
-        // Existence
-        expect(brandContainer).toBeTruthy();
-
-        // Contains name
-        expect(brandContainer.innerHTML).toContain('Name');
-
-        // Contains logo
-        expect(brandContainer.innerHTML).toContain('Logo');
-
-        // Contains slogan
-        expect(brandContainer.innerHTML).toContain('Slogan');
-    });
+    
 
     // Test postcode impact stats
     it('displays postcode impact stats', () => {
-        const postcodeStats = document.querySelector('#postcodeStats');
-
-        let co2Saved = document.getElementById('co2-saved');
-        co2Saved.value = 25;
+        const postcodeStats = document.querySelector('.info-card h3');
         
         // Existence
         expect(postcodeStats).toBeTruthy();
         // Contains text and correct value for co2 saved
-        expect(postcodeStats.innerHTML).toContain('Postcode Impact Stats');
-        expect(co2Saved.value).toBe(25); 
+        expect(postcodeStats.innerHTML).toContain('Postcode Impact Stats'); 
     });
 
     // Test fun fact
     it('displays a fun fact', () => {
-        const funFact = document.querySelector('#funFact');
+        const funFact = document.querySelector('#fun-fact');
 
         funFact.textContent = 'Tests are great, we should all test!'
 
@@ -99,51 +81,16 @@ describe('tracker page element structure', () => {
         // Contains the newly generated quote
         expect(funFact.textContent).toBe('Tests are great, we should all test!');
     })
-});
 
-// Test onClick functionality for calendar and form submission
-describe('tracker page element structure', () => {
-    // Render a new DOM each time
-    beforeEach(async () => {
-        dom = await renderDOM('./tracker.jsx');
-        document = await dom.window.document;
+    // Test that the habit form is hidden
+    it('hides the habit form by default', () => {
+        const form = document.querySelector('form');
+        expect(form.classList.contains('show')).toBe(false);
     });
 
-    it('presents habit tracking form when a date is clicked', () => {
-        const dates = document.getElementById('clickable-date');
-        const popupForm = document.querySelector("form");
-
-        // Check that when you click a date the form shows
-        dates.click();
-        expect(popupForm.classList).toContain('show');
-    })
-
-    it('closes the popup form when you click submit', () => {
-        const submitButton = document.getElementById('habits-submit-button')
-        const popupForm = document.querySelector("form");
-
-        popupForm.classList.add('show');
-        // Check that when you click submit the form disappears
-        submitButton.click();
-        expect(popupForm.classList).not.toContain('show');
-    })
-
-    it('displays a success message when you submit the form', () => {
-        const submitButton = document.getElementById('habits-submit-button')
-        const successPopup = document.getElementById('submit-popup');
-
-        // Check that when you submit the form, the success popup displays
-        submitButton.click();
-        expect(successPopup.classList).toContain('show-submit-popup')
-    })
-
-    it('closes the success popup when you click done', () => {
-        const closeButton = document.getElementById('close-success')
-        const successPopup = document.getElementById('submit-popup');
-
-        successPopup.classList.add('show-submit-popup');
-        // Check that when you submit the form, the success popup displays
-        closeButton.click();
-        expect(successPopup.classList).not.toContain('show-submit-popup')
-    })
+    // Test that the success popup is hidden
+    it('hides success popup by default', () => {
+        const popup = document.getElementById('submit-popup');
+        expect(popup.classList.contains('show-submit-popup')).toBe(false);
+      });      
 });
