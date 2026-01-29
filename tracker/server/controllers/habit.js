@@ -1,13 +1,13 @@
-const Habit = require('../models/Habit');
+const { Habit } = require('../models/Habit');
 
 async function create(req, res) {
     try {
         const data = req.body
         const result = await Habit.create(data)
         console.log(req.body);
-        res.status(200).json({
-            "success": true,
-            "result": result
+        res.status(200).json({ 
+            data: result,
+            "success": true
         })
     } catch (err) {
         res.status(500).json({ error: err.message || 'Unknown error' })
@@ -16,8 +16,9 @@ async function create(req, res) {
 
 async function getStats(req, res) {
     try {
-        const stats = Habit.stats();
-        res.status(200).json(stats);
+        const stats = await Habit.stats();
+        console.log(stats);
+        res.status(200).json({ data: stats });
     } catch(err) {
         res.status(404).json({error: 'Stats could not be fetched.'});
     };

@@ -1,5 +1,5 @@
 const habitsController = require('../../../controllers/habit')
-const { Habit } = require('../../../models/Habit')
+const  { Habit }  = require('../../../models/Habit')
 
 // Mocking response methods
 const mockSend = jest.fn()
@@ -28,6 +28,58 @@ describe('habits controller', () => {
             jest.spyOn(Habit, 'create').mockResolvedValue(new Habit(testHabit))
 
             await habitsController.create(mockReq, mockRes)
+
+            expect(Habit.create).toHaveBeenCalledTimes(1)
+            expect(mockStatus).toHaveBeenCalledWith(200)
+            expect(mockJson).toHaveBeenCalledWith({ 
+                data: new Habit({ ...testHabit}),
+                success: true
+            })
+        })
+        it('should return an error if creation fails', async () => {
+            let testHabit = { 
+                date: "2026-01-23",
+                user_id: 1,
+                postcode: "B29 9PS",
+                commute: null,
+                recycling_bags: 1, litter_pick_bags: 1,meat_free_day: null, refill_cup: null, second_hand_buys: 0 
+            }
+            const mockReq = { body: testHabit }
+
+            jest.spyOn(Habit, 'create').mockRejectedValue(new Error('oh no'))
+
+            await habitsController.create(mockReq, mockRes)
+            
+            expect(Habit.create).toHaveBeenCalledTimes(1)
+            expect(mockStatus).toHaveBeenCalledWith(500)
+            expect(mockJson).toHaveBeenCalledWith({ error: 'oh no' })
+        })
+
+    })
+    describe('stats', () => {
+        it('should return a json object that is not an instance of Habit', async () => {
+            const testStats = {'co2 Saved': 1,
+            'Water Saved': 1,
+            'Electricity Saved': 1,
+            'Landfill Saved': 1 };
+            jest.spyOn(Habit, 'stats').mockResolvedValue(testStats)
+
+            await habitsController.getStats(null, mockRes)
+
+            expect(Habit.stats).toHaveBeenCalledTimes(1)
+            expect(mockStatus).toHaveBeenCalledWith(200)
+            expect(mockJson).toHaveBeenCalledWith({ data: testStats })
+        })
+
+        it('should return an error if stats retrieval fails', async () => {
+
+            jest.spyOn(Habit, 'stats').mockRejectedValue(new Error('Stats could not be fetched.'))
+
+            await habitsController.getStats(null, mockRes)
+            
+            expect(Habit.stats).toHaveBeenCalledTimes(1)
+            expect(mockStatus).toHaveBeenCalledWith(404)
+            expect(mockJson).toHaveBeenCalledWith({ error: 'Stats could not be fetched.' })
         })
     })
 })
