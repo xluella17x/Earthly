@@ -1,20 +1,40 @@
-import SecondaryWrapper from "@/components/SecondaryWrapper";
+import { useQuery } from "@tanstack/react-query"
+import { fetcher } from "@/lib/api"
+import Post from "./Post"
 
-const post = {
-    title: "Cleanup in Victoria Park",
-    
+interface FeedProps {
+  filter?: string
 }
 
-const Feed = () => {
-    return ( 
-        <SecondaryWrapper>
-            <div className="flex justify-between">
-                <div>
-                    <h3 className="text-lg font-semibold mb-4"></h3>
-                </div>
-            </div>
-        </SecondaryWrapper>
-     );
+const Feed = ({ filter }: FeedProps) => {
+  const {
+    data: posts,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["posts", filter],
+    queryFn: () => {
+      const queryParams = filter ? `?type=${filter}` : ""
+      return fetcher(`/posts${queryParams}`)
+    },
+  })
+
+  if (isLoading) return <div className="text-center p-8">Loading feed...</div>
+  if (error) return <div className="text-destructive p-8">Error loading posts.</div>
+
+  return (
+    <div className="flex flex-col gap-4">
+      {posts?.length === 0 && (
+        <div className="text-center py-10">
+          No posts found. Be the first to post!
+        </div>
+      )}
+
+      {posts?.map((post: any) => (
+        <Post key={post.id} {...post} />
+      ))}
+    </div>
+  )
 }
- 
-export default Feed;
+
+export default Feed
